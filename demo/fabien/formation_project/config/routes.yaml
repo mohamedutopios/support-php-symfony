@@ -1,0 +1,14 @@
+formation_index:
+  path: /formation/**
+  controller: App\Controller\FomationController::index
+
+formation_list_frame:
+  path: /formation/frame
+  controller: App\Controller\FomationController::liste
+  methods: [GET, POST]
+
+
+app_formation_details:
+  path: /formation/{id}
+  controller: App\Controller\FomationController::show
+  methods: [ GET, POST ]
