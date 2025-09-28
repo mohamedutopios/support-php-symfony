@@ -1,5 +1,0 @@
-post_routes:
-    resource: 'post.yaml'
-    type: 'yaml'
-
-

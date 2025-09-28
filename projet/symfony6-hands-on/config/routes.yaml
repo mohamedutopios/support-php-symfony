@@ -1,7 +1,0 @@
-controllers:
-    resource: ../src/Controller/
-    type: attribute
-
-# app_index:
-#     path: /
-#     controller: App\Controller\HelloController::index

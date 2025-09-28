@@ -1,3 +1,0 @@
-post:
-    resource: ../config/routes/post.yaml
-    type: yaml

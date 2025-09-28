@@ -1,6 +1,6 @@
 ---
 marp: true
-title: Kubernetes
+title: Openstack
 theme: utopios
 paginate: true
 author: Mohamed Aijjou
@@ -12,940 +12,3694 @@ footer: "Utopios® Tous droits réservés"
 <!-- _class: lead -->
 <!-- _paginate: false -->
 
-# Symfony 7
+# Openstack
+
 
 ---
 
-### Sommaire
+## Sommaire
 
-   1. Présentation de Symfony et de son écosystème.
-   2. Installation de Symfony et configuration de l'environnement de développement.
-   3. Structure d'un projet Symfony et philosophie.
-   4. Injection de dépendance et inversion de contrôle.
-   5. Création de routes et de contrôleurs : gestion des requêtes HTTP.
-   6. Introduction à Twig et création de templates.
-   7. Services et conteneur de services : définition et utilisation basique dans les contrôleurs.
+1. Conception d'un Cloud OpenStack
+2. Gestion des machines virtuelles
+3. Gestion du stockage
+4. Gestion des images
+5. Gestion du réseau
+6. Authentification et autorisations
+7. Administration du Cloud
+
+
 
 </div>
 
---- 
+---
 
 
 <!-- _class: lead -->
 <!-- _paginate: false -->
 
-## Présentation de Symfony et de son écosystème
+## Conception d'un Cloud OpenStack
 
 ---
 
-### Présentation de Symfony et de son écosystème 
+## Conception d'un Cloud OpenStack 
 
-#### Définition
-
-<br>
-
-<div style="font-size:30px">
-
-- Symfony est un framework PHP très populaire pour la création d'applications web. 
-- Il a été publié pour la première fois en 2005 par Fabien Potencier et est actuellement l'un des frameworks les plus utilisés dans le monde du développement web PHP. 
-- Symfony est conçu pour permettre aux développeurs de construire des applications web robustes, évolutives et performantes, tout en favorisant une programmation rapide et une maintenance facile.
-
-</div>
-
----
-
-### Présentation de Symfony et de son écosystème
-
-#### Composants clés de Symfony
+### Apports et spécificités du Cloud  
 
 <div style="font-size:22px">
 
-1. **Kernel** : Le cœur du framework, gère le cycle de vie des requêtes et des réponses.
-2. **Routing** : Permet de définir des routes pour diriger les requêtes HTTP vers les contrôleurs appropriés.
-3. **Controller** : Lieu où la logique de gestion des requêtes est définie.
-4. **Twig** : Le moteur de template par défaut de Symfony, permettant de créer des vues séparées de la logique PHP.
-5. **Doctrine** : Couche d'abstraction de base de données souvent utilisée avec Symfony pour faciliter la manipulation de bases de données.
-6. **Forms** : Composant pour créer et gérer des formulaires.
-7. **Validator** : Fournit des outils pour valider les données envoyées par les utilisateurs.
-8. **Security** : Gère l'authentification, l'autorisation, et la sécurité des applications.
-9. **HTTP Client** : Permet de réaliser des requêtes HTTP.
-10. **Mailer** : Gère l'envoi d'e-mails.
+### ✅ Apports principaux
+
+1. **Élasticité et Scalabilité**
+
+   * Possibilité d’augmenter ou réduire les ressources à la demande.
+   * Utile pour absorber des pics de charge sans investissement matériel.
+
+2. **Réduction des coûts**
+
+   * Modèle basé sur la consommation (pay-as-you-go).
+   * Évite les investissements lourds en matériel et en maintenance.
+
+3. **Accessibilité**
+
+   * Accès aux ressources et aux applications depuis n’importe où via Internet.
+   * Favorise le télétravail et la collaboration internationale.
 
 </div>
 
 ---
 
-### Présentation de Symfony et de son écosystème
+## Conception d'un Cloud OpenStack 
 
-#### Écosystème
+### Apports et spécificités du Cloud  
 
-<div style="font-size:25px">
+<div style="font-size:26px">
 
+### ✅ Apports principaux
 
-L'écosystème Symfony comprend divers outils et projets qui complètent ou étendent les fonctionnalités du framework :
+4. **Innovation accélérée**
 
-- **Symfony Flex** : Un outil qui facilite la configuration et la gestion des dépendances pour les applications Symfony.
-- **API Platform** : Un framework puissant pour construire des API hypermédias avancées et des applications React ou Vue.js avec un backend Symfony.
-- **Symfony Bundles** : Des paquets réutilisables qui peuvent être intégrés dans n'importe quelle application Symfony pour ajouter des fonctionnalités.
-- **Symfony Console** : Permet de créer des applications en ligne de commande.
-- **Symfony Workflow** : Un composant qui aide à définir des processus complexes, séquentiels ou parallèles, connus sous le nom de workflows.
+   * Déploiement rapide d’environnements de test, développement et production.
+   * Large catalogue de services (IA, Big Data, IoT, sécurité, etc.).
+
+5. **Sécurité et résilience**
+
+   * Centres de données hautement sécurisés avec redondance.
+   * Sauvegardes et plans de reprise après sinistre (PRA) intégrés.
+
+</div>
+
+---
+
+## Conception d'un Cloud OpenStack 
+
+### Types de Cloud 
+
+<div style="font-size:22px">
+
+## 1. Modèles de services
+
+### 🔹 **SaaS (Software as a Service)**
+
+* **Définition** : Logiciel accessible via Internet, sans installation locale.
+* **Exemples** : Gmail, Microsoft 365, Salesforce.
+* **Avantages** :
+
+  * Pas de maintenance par l’utilisateur.
+  * Mise à jour automatique.
+  * Facturation à l’usage/licence.
+* **Limite** : Moins de personnalisation.
+
+</div>
+
+---
+
+## Conception d'un Cloud OpenStack 
+
+### Types de Cloud 
+
+<div style="font-size:22px">
+
+## 1. Modèles de services
+
+### 🔹 **PaaS (Platform as a Service)**
+
+* **Définition** : Plateforme de développement et déploiement fournie par le Cloud.
+* **Exemples** : Heroku, Google App Engine, Azure App Service.
+* **Avantages** :
+
+  * Gestion simplifiée du cycle de vie des applications.
+  * Pas besoin de gérer serveurs ou OS.
+* **Limite** : Dépendance au fournisseur (vendor lock-in).
 
 
 </div>
 
 ---
 
+## Conception d'un Cloud OpenStack 
 
-### Présentation de Symfony et de son écosystème
+### Types de Cloud 
 
-#### Communauté et ressources
+<div style="font-size:24px">
 
-<div style="font-size:33px">
+## 1. Modèles de services
 
+### 🔹 **IaaS (Infrastructure as a Service)**
 
-<br>
+* **Définition** : Mise à disposition de ressources matérielles virtuelles (VM, stockage, réseau).
+* **Exemples** : Amazon EC2, Microsoft Azure VM, Google Compute Engine.
+* **Avantages** :
 
-- Symfony bénéficie d'une grande communauté de développeurs. 
-- Il existe de nombreuses conférences (SymfonyCon, SymfonyLive), des meetups, et une documentation très complète accessible à tous. 
-- Le framework est aussi supporté par SensioLabs et une large communauté de contributeurs qui continuent à développer et à améliorer ses fonctionnalités.
+  * Contrôle complet sur l’infrastructure.
+  * Grande flexibilité.
+* **Limite** : Nécessite des compétences d’administration système.
 
-
-</div>
-
----
-
-### Présentation de Symfony et de son écosystème
-
-#### Environnement de travail
-
-<div style="font-size:33px">
-
-
-<br>
-
-- Symfony propose un outil de ligne de commande très puissant nommé **Symfony CLI** qui est essentiel pour gérer efficacement le développement des applications Symfony. 
-- Cet outil offre une gamme complète de fonctionnalités qui facilitent la création, la gestion et l'exploitation des applications Symfony.
 
 
 </div>
 
 ---
 
-### Présentation de Symfony et de son écosystème
+## Conception d'un Cloud OpenStack 
 
-#### Environnement de travail
+### Types de Cloud 
 
 <div style="font-size:28px">
 
+### 2. Modèles de déploiement
 
-1. **Serveur Web Local** : Symfony peut être utilisé avec divers serveurs web, comme Apache ou Nginx. Cependant, pour un développement rapide, Symfony CLI inclut un serveur web local qui peut être lancé très facilement pour tester les applications.
-2. **Environnement PHP** : Par exemple, pour Symfony 7, il est nécessaire de disposer au minimum de PHP 8.2, bien que les versions ultérieures puissent être recommandées pour exploiter toutes les fonctionnalités et améliorations de performance. 
-3. **Composer** : Il s'agit du gestionnaire de dépendances pour PHP. Composer est utilisé pour gérer les bibliothèques dont dépend le projet Symfony.
+### 🔹 **Cloud public**
+
+* **Définition** : Services partagés entre plusieurs clients sur l’infrastructure du fournisseur.
+* **Exemples** : AWS, Azure, Google Cloud.
+* **Avantage** : Coût réduit, scalabilité maximale.
+* **Limite** : Moins de contrôle, dépendance au fournisseur.
 
 
-</div>
-
----
-
-### Présentation de Symfony et de son écosystème
-
-#### Environnement de travail
-
-<div style="font-size:35px">
-
-4. **Base de données** : Symfony supporte plusieurs systèmes de gestion de base de données comme MySQL, PostgreSQL, SQLite, etc., et utilise souvent Doctrine ORM pour interagir avec la base de données.
-5. **Outils de développement** : Des outils comme Xdebug pour le débogage, PHPUnit pour les tests unitaires, et des intégrations avec des systèmes de versionnage comme Git.
 
 
 </div>
 
 ---
 
+## Conception d'un Cloud OpenStack 
 
-### Présentation de Symfony et de son écosystème
-
- #### Symfony CLI
-
-<div style="font-size:27px">
-
-<br>
-
-L'outil Symfony CLI est conçu pour augmenter la productivité des développeurs en fournissant une interface en ligne de commande pour effectuer de nombreuses tâches courantes de développement et de déploiement. 
-
-- **Démarrage du serveur local** : Vous pouvez démarrer un serveur web local en utilisant la commande `symfony server:start`. Ce serveur est configuré pour fonctionner avec les applications Symfony et fournit des performances optimales en développement.
-- **Création de nouvelles applications** : Avec la commande `symfony new <nom-du-projet>`, vous pouvez créer une nouvelle application Symfony avec ou sans les dépendances full-stack.
-
-
-</div>
-
----
-
-### Présentation de Symfony et de son écosystème
-
- #### Symfony CLI
-
-<div style="font-size:27px">
-
-
-
-- **Gestion de la sécurité** : Le CLI peut vérifier les vulnérabilités de sécurité dans les bibliothèques utilisées par l'application.
-- **Gestion des environnements** : Facilite la configuration des variables d'environnement nécessaires pour différents environnements de déploiement.
-- **Debugging et logs** : Offre des outils pour visualiser les logs et faire du debugging de l'application.
-- **Interactions avec les bases de données** : Permet de créer, gérer et migrer les bases de données directement depuis la ligne de commande.
-- **Intégration avec SymfonyCloud** : Symfony CLI est parfaitement intégré avec SymfonyCloud, ce qui facilite le déploiement des applications Symfony dans le cloud.
-
-
-</div>
-
----
-
-### Présentation de Symfony et de son écosystème
-
- #### Comparaison
-
-<div style="font-size:25px">
-
-
-
-| Fonctionnalité                           | Symfony 4         | Symfony 5         | Symfony 6         | Symfony 7         |
-|------------------------------------------|-------------------|-------------------|-------------------|-------------------|
-| **Version PHP minimale requise**         | PHP 7.1.3         | PHP 7.2.5         | PHP 8.0           | PHP 8.1 ou supérieur |
-| **Symfony Flex**                         | Introduit         | Amélioré          | Amélioré          | Amélioré          |
-| **Composant Security**                   | Basique           | Refonte partielle | Refonte complète  | Améliorations supplémentaires |
-| **Composant Mailer**                     | Non disponible    | Introduit         | Amélioré          | Amélioré          |
-| **Support des microservices**            | Limité            | Amélioré          | Amélioré          | Très amélioré  
-
-
-</div>
-
----
-
-
-#### Présentation de Symfony et de son écosystème
-
-##### Comparaison
-
-<div style="font-size:23px">
-
-
-| Fonctionnalité                           | Symfony 4         | Symfony 5         | Symfony 6         | Symfony 7         |
-|------------------------------------------|-------------------|-------------------|-------------------|-------------------|
-| **Version PHP minimale requise**         | PHP 7.1.3         | PHP 7.2.5         | PHP 8.0           | PHP 8.1 ou supérieur |
-| **Intégration API Platform**             | Possible          | Amélioré          | Amélioré          | Intégration plus profonde |
-| **Twig (moteur de templates)**           | Amélioré          | Amélioré          | Amélioré          | Fonctionnalités supplémentaires |
-| **Performances**                         | Bonnes            | Améliorées        | Très améliorées   | Optimisées        |
-| **Dépréciation et nettoyage de code**    | Ongoing           | Continu           | Continu           | Nettoyage final des anciennes pratiques 
-
-
-</div>
-
----
-
-
-#### Présentation de Symfony et de son écosystème
-
-##### Apport Symfony 7
-
-<div style="font-size:23px">
-
-
-| Fonctionnalité                         | Améliorations Clés |
-|----------------------------------------|--------------------|
-| **Performance**                        | Optimisations du compilateur et des composants. |
-| **Authentification**                   | Système refondu, support pour OAuth2 et JWT. |
-| **Docker**                             | Meilleure intégration pour le développement et déploiement. |
-| **Mailer**                             | Nouvelles fonctionnalités pour la gestion des e-mails. |
-| **Workflow**                           | Support pour les sous-processus, meilleure visualisation. |
-| **API Platform**                       | Meilleure création d'APIs REST et GraphQL, plus d'outils. |
-| **Twig 4**                             | Moteur de templates amélioré, plus expressif. |
-| **Debugging et Profiling**             | Interface utilisateur améliorée, plus de détails sur les performances. |
-| **Tests**                              | Support pour les tests parallèles, meilleure intégration avec PHPUnit. |
-</div>
-
----
-
-#### Installation de Symfony et configuration de l'environnement de développement.
-
-##### Installation de Symfony 
-
-<br>
-
-<div style="font-size:25px">
-
-
-**1. Installation de Symfony**
-
-Symfony propose plusieurs méthodes d'installation, mais l'utilisation de Composer est la méthode recommandée.
-
-**a. Installation de Symfony via Composer**
-
-```bash
-composer create-project symfony/website-skeleton my_project_name
-```
-
-*Si vous prévoyez de construire une micro-application ou une API, vous pouvez choisir de démarrer avec la version minimale de Symfony*
-
-```bash
-composer create-project symfony/skeleton my_project_name
-```
-
-
-</div>
-
----
-
-#### Installation de Symfony et configuration de l'environnement de développement.
-
-##### Installation de Symfony 
-
-<br>
-
-<div style="font-size:27px">
-
-
-**1. Installation de Symfony**
-
-Symfony propose plusieurs méthodes d'installation, mais l'utilisation de Composer est la méthode recommandée.
-
-**b. Utilisation de Symfony CLI**
-
-Une autre option est d'utiliser Symfony CLI, un outil qui fournit des fonctionnalités supplémentaires comme la création de serveurs de développement locaux et la gestion de certificats SSL locaux. Vous pouvez télécharger Symfony CLI depuis le site web officiel de Symfony.
-
-
-```bash
-symfony new my_project_name --webapp
-```
-
-
-</div>
-
----
-
-#### Installation de Symfony et configuration de l'environnement de développement.
-
-##### Installation de Symfony 
-
-<br>
-<div style="font-size:23px">
-
-**2. Configuration de l'Environnement de Développement**
-
-- Serveur Web Local: Symfony CLI fournit un serveur web local pratique pour tester vos applications Symfony.
-
-```bash
-cd my_project_name
-symfony server:start
-```
-
-- Configuration Environnementale
-
-- Symfony utilise des variables d'environnement stockées dans le fichier `.env` à la racine de votre projet pour gérer la configuration de l'application. 
-- Vous pouvez personnaliser les configurations de la base de données, les clés API, et d'autres paramètres sensibles en modifiant ce fichier.
-
-
-</div>
-
-
----
-
-#### Structure d'un projet Symfony et philosophie.
-
-##### Structure d'un Projet Symfony
-
-<div style="font-size:23px">
-
-<br>
-
-- **`bin/`**: Contient les exécutables, y compris la console Symfony pour exécuter des commandes.
-- **`config/`**: Stocke tous les fichiers de configuration de votre projet. La configuration est divisée par packages et environnements, permettant une personnalisation fine.
-- **`public/`**: Le dossier accessible publiquement. Il contient le fichier `index.php`, qui est le point d'entrée de toutes les requêtes dans votre application, ainsi que des ressources statiques comme les images et les fichiers JavaScript et CSS.
-- **`src/`**: Cœur de votre application, contenant le code PHP, comme les contrôleurs, les entités (modèles), les formulaires, et plus. Il est structuré de manière à suivre les principes de l'architecture logicielle.
-- **`templates/`**: Contient les templates Twig, le moteur de template de Symfony, pour la génération des vues.
-
-
-</div>
-
----
-
-#### Structure d'un projet Symfony et philosophie.
-
-##### Structure d'un Projet Symfony
+### Types de Cloud 
 
 <div style="font-size:28px">
 
-<br>
+### 2. Modèles de déploiement
 
-- **`translations/`**: Dossier pour les fichiers de traduction, permettant l'internationalisation de votre application.
-- **`var/`**: Contient les fichiers générés par Symfony comme le cache et les logs, spécifiques à l'environnement de votre application (dev, test, prod).
-- **`vendor/`**: Géré par Composer, ce dossier contient toutes les bibliothèques tierces et les composants de Symfony utilisés dans votre projet.
-- **`tests/`**: Dossier pour les tests unitaires et fonctionnels de votre application, encouragés pour suivre la méthodologie TDD (Test-Driven Development).
+### 🔹 **Cloud privé**
 
-</div>
+* **Définition** : Infrastructure dédiée à une seule organisation.
+* **Exemples** : VMware vSphere, OpenStack, Azure Stack.
+* **Avantage** : Plus de contrôle et de sécurité.
+* **Limite** : Coûts élevés (matériel et maintenance).
 
----
-
-#### Structure d'un projet Symfony et philosophie.
-
-##### Philosophie de Symfony
-
-<div style="font-size:19px">
-
-- **Flexibilité**: Au cœur de Symfony se trouve le principe de la flexibilité. Le framework est conçu pour s'adapter à vos besoins, pas l'inverse. Que vous construisiez une petite API ou une application web complexe, Symfony peut être aussi léger ou complet que nécessaire.
-- **Réutilisabilité**: Grâce à sa structure modulaire et à l'utilisation intensive de composants réutilisables (bundles), Symfony encourage le développement de solutions pouvant être facilement partagées et réutilisées dans différents projets.
-- **Meilleures pratiques**: Symfony est conçu pour encourager les développeurs à suivre les meilleures pratiques de programmation et les principes de conception de logiciels, comme le modèle MVC (Modèle-Vue-Contrôleur) pour une séparation claire des préoccupations.
-- **Communauté**: Une large communauté de développeurs soutient Symfony, contribuant à une riche écosystème de bundles, de plugins, et de documentation, facilitant ainsi l'apprentissage et l'adoption du framework.
-- **Performance**: Bien que riche en fonctionnalités, Symfony est optimisé pour la performance, avec des outils comme le composant HttpCache pour réduire le temps de réponse des applications.
-- **Interopérabilité**: Symfony respecte les standards PHP et encourage l'utilisation de composants et de bibliothèques qui suivent les normes de l'industrie, permettant une intégration fluide avec d'autres systèmes et frameworks.
 
 </div>
 
 ---
 
-####  Injection de dépendance et inversion de contrôle.
+## Conception d'un Cloud OpenStack 
 
-##### Inversion de Contrôle (IoC)
-
-<div style="font-size:30px">
-
-- L'Inversion de Contrôle est un principe de conception loicielle où le contrôle du flux d'exécution est inversé par rapport à la programmation traditionnelle. 
-- Dans la programmation traditionnelle, votre code (les appels de méthodes, les instanciations d'objets, etc.) contrôle le flux de l'application. Avec l'IoC, ce flux est externalisé à un conteneur ou un framework.
-
-- L'IoC est souvent réalisé à travers différents mécanismes tels que l'injection de dépendance, les "templates method" et les "strategy pattern". 
-- Le but est de réduire le couplage entre les composants du logiciel, rendant le système plus flexible, plus facile à tester et à maintenir.
-
-</div>
-
----
-
-####  Injection de dépendance et inversion de contrôle.
-
-#####  Injection de Dépendance (DI)
+### Types de Cloud 
 
 <div style="font-size:28px">
 
-- L'injection de dépendance est une forme spécifique de l'IoC où les dépendances (c'est-à-dire les instances de classes dont un objet a besoin pour fonctionner) sont "injectées" dans un objet au lieu que l'objet les crée lui-même. 
-- Il existe plusieurs façons d'injecter des dépendances, y compris par constructeur, par setter, ou directement dans les propriétés.
+### 2. Modèles de déploiement
 
-- Dans le contexte d'un framework comme Symfony, l'injection de dépendance est gérée par un composant spécialisé appelé "conteneur de services". 
-- Ce conteneur crée et gère les instances des objets et leurs dépendances, les injectant là où elles sont nécessaires selon la configuration spécifiée par le développeur.
+### 🔹 **Cloud hybride**
 
-</div>
+* **Définition** : Combinaison de Cloud public + privé.
+* **Exemple** : Une entreprise garde ses données sensibles en privé, mais utilise un public cloud pour ses applications web.
+* **Avantage** : Flexibilité et optimisation des coûts.
+* **Limite** : Complexité de gestion.
 
----
-
-####  Injection de dépendance et inversion de contrôle.
-
-##### Avantages de l'IoC et de la DI
-
-<div style="font-size:27px">
-<br>
-
-- **Couplage faible :** Les composants de votre application sont moins dépendants les uns des autres, ce qui rend votre système plus modulaire et plus flexible.
-- **Facilité de test :** Il est plus facile de tester les composants en isolation en injectant des implémentations factices ou des mock objects pour les dépendances.
-- **Gestion centralisée des dépendances :** Le conteneur de services de Symfony gère la création et l'injection des dépendances, ce qui simplifie la gestion des instances de classe à travers l'application.
-- **Configuration externe :** Les dépendances peuvent être configurées en dehors du code source, par exemple dans des fichiers de configuration YAML ou XML de Symfony, facilitant les changements sans nécessiter de modifier le code.
-
-</div>
-
----
-#### Injection de dépendance et inversion de contrôle.
-
-##### Utilisation dans Symfony
-
-<div style="font-size:27px">
-
-- Symfony utilise intensivement l'injection de dépendance et l'inversion de contrôle à travers son conteneur de services. 
-- Par exemple, lorsque vous définissez un service dans Symfony (une classe que vous souhaitez utiliser à travers l'application), vous pouvez spécifier ses dépendances dans le fichier de configuration du service. 
-- Symfony s'occupe ensuite de l'instanciation de ces services et de leurs dépendances lorsque le service est requis.
-
-```yaml
-# config/services.yaml
-services:
-    App\Service\MyService:
-        arguments:
-            $dependency: '@another_service'
-```
 
 </div>
 
 ---
 
-#### Création de routes et de contrôleurs : gestion des requêtes HTTP.
+## Conception d'un Cloud OpenStack 
 
-##### Création de Routes
+### Types de Cloud 
 
-<div style="font-size:27px">
+<div style="font-size:28px">
 
-- Les routes peuvent être configurées de plusieurs manières : annotations dans les contrôleurs, fichiers YAML, XML ou PHP. 
-- Par exemple, vous pouvez définir une route dans un contrôleur en utilisant des annotations PHP :
+### 2. Modèles de déploiement
 
-```php
-use Symfony\Component\Routing\Annotation\Route;
+### 🔹 **Cloud hybride**
 
-class MonController {
-    #[Route('/chemin', name: 'nom_route')]
-    public function maMethode(): Response {
-        // retour route
-    }
-}
-```
+* **Définition** : Combinaison de Cloud public + privé.
+* **Exemple** : Une entreprise garde ses données sensibles en privé, mais utilise un public cloud pour ses applications web.
+* **Avantage** : Flexibilité et optimisation des coûts.
+* **Limite** : Complexité de gestion.
+
+
 </div>
 
 ---
-#### Création de routes et de contrôleurs : gestion des requêtes HTTP.
 
-##### Contrôleurs
+## Conception d'un Cloud OpenStack 
+
+### 1. Historique & philosophie du projet  
 
 <div style="font-size:21px">
 
-- Un contrôleur dans Symfony est une classe qui traite les requêtes HTTP et retourne des réponses. - La classe doit étendre `AbstractController` ou implémenter une logique de retour de réponse appropriée.
+### **Historique**
 
-```php
-namespace App\Controller;
+* **2010** : OpenStack est créé par la collaboration entre **NASA** (projet Nebula) et **Rackspace** (cloud public américain).
+* But initial : construire une **infrastructure cloud open source**, alternative aux offres propriétaires (Amazon AWS, VMware…).
+* **Projet communautaire** : Rapidement adopté par de nombreux acteurs (RedHat, IBM, HP, SUSE, Intel, Canonical, etc.).
+* Évolution :
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+  * 2011 : Premier « release » officiel (Austin)
+  * Sorties régulières tous les 6 mois (cycle de développement proche de Linux)
+  * Fondation OpenStack créée en 2012 pour structurer la gouvernance et la roadmap.
 
-class ConferenceController extends AbstractController {
-    #[Route('/conference', name: 'app_conference')]
-    public function index(): Response {
-        return $this->render('conference/index.html.twig', [
-            'controller_name' => 'ConferenceController',
-        ]);
-    }
-}
-```
-
-Ce contrôleur retourne une vue Twig, mais vous pouvez également retourner directement une réponse HTTP.
+</div>
 
 ---
 
-#### Création de routes et de contrôleurs : gestion des requêtes HTTP.
+## Conception d'un Cloud OpenStack  
 
-##### Gestion des Requêtes HTTP
+### 1. Historique & philosophie du projet 
+
+
+<div style="font-size:20px">
+
+### **Philosophie du projet**
+
+* **Open Source** : Tout le code est libre (licence Apache 2.0).
+* **Communauté** : Contributions ouvertes, processus démocratique, évènements réguliers (OpenStack Summit, PTG…).
+* **Modulaire** :
+
+  * Chaque composant est indépendant (Compute, Réseau, Stockage…).
+  * Les services communiquent via API REST et message bus (RabbitMQ).
+* **Interopérable** :
+
+  * API standardisées, support multi-hyperviseur (KVM, Xen, VMware…)
+  * Support de multiples matériels réseau/stockage
+* **Scalable** : Conçu pour de très grands datacenters, mais aussi utilisable en démo sur une seule machine.
+
+
+</div>
+
+---
+
+## Conception d'un Cloud OpenStack 
+
+### 2. Cas d’usage d’OpenStack 
+
+
+<div style="font-size:25px">
+
+### **Cloud privé (Private Cloud)**
+
+* Utilisation principale : fournir à une entreprise ou un organisme son propre « cloud » à la AWS mais hébergé sur son infrastructure.
+* Avantages : sécurité, maîtrise des données, personnalisation, conformité.
+
+### **Cloud public / communautaire**
+
+* Certains fournisseurs proposent du cloud public basé sur OpenStack (OVH Public Cloud, CityCloud, etc.)
+* Offre mutualisée et élastique pour les clients, alternative aux géants du cloud (AWS, Azure).
+
+</div>
+
+---
+
+## Conception d'un Cloud OpenStack 
+
+### 2. Cas d’usage d’OpenStack
+
+
+<div style="font-size:24px">
+
+### **Cloud hybride**
+
+* Intégration d’OpenStack avec d’autres clouds (Azure, AWS, Google Cloud)
+* Cas : migration, burst temporaire de charge, reprise d’activité.
+
+### **Cas d’usage avancés**
+
+* Hébergement d’environnements de test, de production, de CI/CD pour les DevOps
+* Plateformes d’hébergement de VM pour la recherche (universités, laboratoires)
+* Fourniture de services managés pour des clients internes (as a Service : IaaS, PaaS, CaaS)
+* Support de conteneurs (Kubernetes avec Magnum, ou OpenShift sur OpenStack)
+* Big Data, HPC (calcul intensif)
+
+
+</div>
+
+---
+
+## Conception d'un Cloud OpenStack 
+
+### 3. Écosystème OpenStack
+
+
+<div style="font-size:21px">
+
+### **Distributions OpenStack**
+
+* Plusieurs acteurs proposent des distributions « clé en main » d’OpenStack :
+
+  * **Red Hat OpenStack Platform** (RHOSP)
+  * **Mirantis OpenStack**
+  * **Canonical Charmed OpenStack**
+  * **SUSE OpenStack Cloud** (fin de support)
+  * **OVH Public Cloud**, CityCloud, etc. (services gérés)
+* **Installations simplifiées** :
+
+  * **DevStack** (pour les labs/démo, non production)
+  * **MicroStack** (Canonical, facile en local)
+  * **Packstack**, **TripleO**, **Kolla-Ansible** (pour la prod)
+
+
+</div>
+
+---
+
+## Conception d'un Cloud OpenStack 
+
+### 3. Écosystème OpenStack
+
+
+<div style="font-size:22px">
+
+### **Projets dérivés et modules complémentaires**
+
+* **Projets « Core »** : Keystone (identité), Nova (compute), Glance (images), Neutron (réseau), Cinder (block storage), Swift (object storage), Horizon (dashboard web)
+* **Projets additionnels :**
+
+  * **Heat** (orchestration IaaS « Infrastructure as Code »)
+  * **Magnum** (Kubernetes as a Service)
+  * **Ironic** (bare metal provisioning)
+  * **Octavia** (Load Balancer as a Service)
+  * **Barbican** (gestion des secrets)
+  * **Manila** (partage de fichiers)
+
+
+
+</div>
+
+---
+
+## Conception d'un Cloud OpenStack 
+
+### 3. Écosystème OpenStack
+
+
+<div style="font-size:24px">
+
+### **Intégrations et écosystème**
+
+* Support de :
+
+  * **Hyperviseurs** : KVM (par défaut), QEMU, Xen, Hyper-V, VMware ESXi
+  * **Stockage** : Ceph, NetApp, EMC, local, S3 compatible
+  * **Réseaux** : Cisco, Juniper, Mellanox, Open vSwitch, LinuxBridge
+* Intégration possible avec :
+
+  * **Ansible**, **Terraform**, **Kubernetes**, **Prometheus**, **Grafana**, etc.
+  * Outils de supervision et monitoring (Zabbix, ELK…)
+</div>
+
+---
+
+## Conception d'un Cloud OpenStack
+
+### 3. Écosystème OpenStack
+
+
+<div style="font-size:24px">
+<center>
+
+<img src="./assets/open1.jpg" width="700px" height="400px">
+
+<center>
+
+</div>
+
+---
+
+## Conception d'un Cloud OpenStack 
+
+### 3. Écosystème OpenStack
+
+
+<div style="font-size:24px">
+<center>
+
+<img src="./assets/open2.webp" width="800px" height="500px">
+
+<center>
+
+</div>
+
+---
+
+## Conception d'un Cloud OpenStack 
+
+### 3. Écosystème OpenStack
+
+
+<div style="font-size:24px">
+<center>
+
+<img src="./assets/open3.jpg" width="800px" height="400px">
+
+<center>
+
+</div>
+
+---
+
+## Conception d'un Cloud OpenStack
+
+### 1. Les composants principaux (« Core Services »)
+
+
+<div style="font-size:25px">
+
+### **Keystone (Service d’identité)**
+
+* **Rôle** : Authentification et autorisation (IAM du cloud OpenStack)
+* **Fonctions** : Gestion des utilisateurs, rôles, tenants/projets, tokens d’accès
+* **Utilisé par** : Tous les autres services pour vérifier les identités
+
+### **Glance (Service d’images)**
+
+* **Rôle** : Gestion des images disques (templates de VM)
+* **Fonctions** : Import/export, catalogue d’images, gestion des métadonnées, snapshot d’instances
+  
+</div>
+
+---
+
+## Conception d'un Cloud OpenStack
+
+### 1. Les composants principaux (« Core Services »)
+
 
 <div style="font-size:30px">
 
 <br>
 
-- Les méthodes HTTP (GET, POST, PUT, DELETE, etc.) spécifient le type d'action que le client souhaite effectuer. 
-- Par défaut, une route accepte toutes les méthodes HTTP, mais vous pouvez restreindre ce comportement en spécifiant les méthodes autorisées via l'argument `methods` de l'annotation `Route` :
+### **Nova (Compute)**
 
-```php
-#[Route('/blog', name: 'article_list', methods: ['GET'])]
-```
+* **Rôle** : Orchestration et gestion des machines virtuelles (VM)
+* **Fonctions** : Lancer, arrêter, migrer, scheduler des VMs, gestion des flavors (taille des VMs), prise en charge multi-hyperviseur (KVM, Xen, VMware)
 
+
+  
 </div>
 
 ---
-#### Introduction à Twig et création de templates.
 
-##### Introduction à Twig
+## Conception d'un Cloud OpenStack
 
-<div style="font-size:35px">
+### 1. Les composants principaux (« Core Services »)
 
-<br>
 
-- Twig est conçu pour être à la fois convivial pour les développeurs et sécurisé. 
-- Il offre une syntaxe claire et concise pour l'insertion de données PHP et l'exécution de structures logiques simples directement dans les fichiers de template HTML. 
-- Twig compile automatiquement les templates en code PHP pur, ce qui lui permet d'être très performant.
+<div style="font-size:27px">
 
+### **Neutron (Réseau)**
+
+* **Rôle** : Gestion avancée des réseaux virtuels pour les instances
+* **Fonctions** :
+
+  * Création de réseaux privés/publics
+  * Gestion des sous-réseaux, routeurs, DHCP
+  * Attribution d’IP flottante (NAT)
+  * Groupes de sécurité (pare-feu virtuel)
+  * Plugins pour SDN (Open vSwitch, LinuxBridge…)
+
+
+  
 </div>
 
+---
 
---- 
+## Conception d'un Cloud OpenStack 
 
-#### Introduction à Twig et création de templates.
+### 1. Les composants principaux (« Core Services »)
 
-##### Introduction à Twig
 
 <div style="font-size:25px">
 
-Les principales caractéristiques de Twig incluent :
+### **Cinder (Block Storage)**
 
-- **Syntaxe Expressive** : Twig utilise une syntaxe concise qui simplifie l'ajout de logique dans les vues, comme des boucles, des conditions, et des filtres pour manipuler les données.
-- **Héritage de templates** : Twig supporte l'héritage, permettant aux développeurs de définir un "layout" de base et de le réutiliser à travers différents templates, facilitant ainsi la maintenance et la cohérence du design.
-- **Filtrage et Fonctions** : Une large gamme de filtres et de fonctions est disponible pour formater les données, réaliser des calculs et exécuter d'autres opérations courantes directement dans les templates.
-- **Sécurité** : Twig offre une échappement automatique des sorties pour protéger contre les attaques XSS (Cross-site scripting), une considération de sécurité importante dans le développement web.
+* **Rôle** : Fournir des volumes de stockage blocs persistants pour les instances
+* **Fonctions** : Création, attachement, détachement de volumes, snapshots de volumes, gestion de backend (LVM, Ceph, NetApp…)
+
+### **Swift (Object Storage)**
+
+* **Rôle** : Stockage d’objets (style S3/Azure Blob)
+* **Fonctions** : Upload/download de fichiers, versioning, stockage distribué, haute résilience
+* **Usage** : Backup, stockage d’images, partage de fichiers volumineux
+
+
+  
+</div>
+
+---
+
+## Conception d'un Cloud OpenStack 
+
+### 1. Les composants principaux (« Core Services »)
+
+
+<div style="font-size:30px">
+
+### **Autres modules importants**
+
+* **Horizon** : Tableau de bord Web pour utilisateurs et admins (interface graphique)
+* **Heat** : Orchestration de ressources (déploiement automatisé, IaC via templates YAML)
+* **Magnum** : Service de déploiement de clusters de conteneurs (Kubernetes, Docker Swarm)
+
+
+
+  
+</div>
+
+---
+
+## Conception d'un Cloud OpenStack 
+
+### 2. Topologie générale d’un cloud OpenStack
+
+
+<div style="font-size:30px">
+
+<center>
+
+<img src="./assets/open6.jpg" width="600px" height="400px">
+
+<center>
+  
+</div>
+
+---
+
+## Conception d'un Cloud OpenStack 
+
+### 2. Topologie générale d’un cloud OpenStack
+
+
+<div style="font-size:27px">
+
+### **Explications :**
+
+* **Contrôleur** : cœur du système (API, gestion centrale, base de données, files de messages)
+* **Nœuds Compute** : hôtes où s’exécutent les VMs
+* **Nœuds Storage** : hôtes qui stockent les volumes (Cinder) et/ou objets (Swift)
+* **Nœuds Réseau** : gèrent la connectivité, les routeurs, le NAT, load balancing
+
+> **Note :** Sur de petits labs, tout est parfois sur une seule VM. En production, chaque rôle peut avoir plusieurs serveurs dédiés.
+
+  
+</div>
+
+---
+
+## Conception d'un Cloud OpenStack 
+
+### 3. Services internes de communication
+
+
+<div style="font-size:24px">
+
+### **Explications :**
+
+* **RabbitMQ** (ou autre message bus) :
+
+  * Sert de bus de messages asynchrone entre les services (ex : Nova scheduler qui notifie un compute node de lancer une VM)
+  * Clé pour la scalabilité et le découplage des composants
+* **MariaDB/MySQL** (ou PostgreSQL) :
+
+  * Stockage de toutes les métadonnées (état des ressources, utilisateurs, etc.)
+* **etcd** (ou Memcached, Redis, etc.) :
+
+  * Coordination, stockage clé/valeur distribué (utile pour certains services avancés, réseaux, ou haute-disponibilité)
+
+  
+</div>
+
+---
+
+
+
+<!-- _class: lead -->
+<!-- _paginate: false -->
+
+## Installation & premiers pas OpenStack
+
+---
+
+## Installation & premiers pas OpenStack 
+
+### 1. Présentation des modes d’installation
+
+
+<div style="font-size:27px">
+
+### **A. Solutions tout-en-un (all-in-one)**
+
+* **DevStack**
+
+  * Script d’installation rapide pour tests, démo, formation.
+  * \*Avantages \*: déploiement très simple, installation sur une seule VM (ou machine physique).
+  * \*Limites \*: non recommandé pour la production, performances limitées, reset à chaque reboot.
+  * **Usage : idéal pour la formation, PoC, labs étudiants.**
+  
+</div>
+
+---
+
+## Installation & premiers pas OpenStack 
+
+### 1. Présentation des modes d’installation
+
+
+<div style="font-size:28px">
+
+### **A. Solutions tout-en-un (all-in-one)**
+
+* **MicroStack**
+
+  * Distribution packagée par Canonical (Ubuntu), très légère, facile à installer.
+  * \*Avantages \*: rapide, usage desktop/VM, quelques minutes pour être prêt.
+  * \*Limites \*: moins personnalisable, communauté plus petite.
+  * **Usage : parfait pour tester sur un laptop ou VM.**
+  
+</div>
+
+---
+
+## Installation & premiers pas OpenStack 
+
+### 1. Présentation des modes d’installation
+
+
+<div style="font-size:30px">
+
+### **A. Solutions tout-en-un (all-in-one)**
+
+* **Packstack / RDO** (Red Hat)
+
+  * Installation semi-automatisée pour CentOS/RHEL, plus flexible que DevStack, plus adaptée à la pré-prod.
+  * **Usage : démonstrations un peu plus proches de la production.**
+
+  
+</div>
+
+---
+
+## Installation & premiers pas OpenStack 
+
+### 1. Présentation des modes d’installation
+
+
+<div style="font-size:28px">
+
+### **B. Déploiements multi-nœuds (production/réaliste)**
+
+* **Kolla-Ansible, TripleO, Juju**
+
+  * Outils d’automatisation pour installer OpenStack sur plusieurs serveurs (production, haute disponibilité).
+  * \*Avantages \*: scalable, modulaire, résilient.
+  * \*Limites \*: plus complexe à mettre en œuvre, nécessite plusieurs machines/VM.
+  * **Usage : production, cloud d’entreprise, formations avancées.**
+
+  
+</div>
+
+---
+
+## Installation & premiers pas OpenStack 
+
+### 2. Installation rapide : DevStack
+
+
+<div style="font-size:20px">
+
+### **Pré-requis**
+
+* 1 VM ou machine Ubuntu/Debian (4 Go RAM mini, 2 CPU, 20 Go disque)
+* Accès sudo/root
+* Connexion Internet
+
+### **Étapes de base**
+
+#### **A. Préparation de la VM**
+
+```bash
+# Mise à jour et installation de git
+sudo apt update
+sudo apt install -y git
+```
+
+#### **B. Récupération du script DevStack**
+
+```bash
+git clone https://opendev.org/openstack/devstack
+cd devstack
+```
+  
+</div>
+
+---
+
+## Installation & premiers pas OpenStack 
+
+### 2. Installation rapide : DevStack
+
+
+<div style="font-size:23px">
+
+### **Étapes de base**
+
+#### **C. Création d’un fichier de configuration rapide**
+
+```bash
+cat > local.conf <<EOF
+[[local|localrc]]
+ADMIN_PASSWORD=stack
+DATABASE_PASSWORD=stack
+RABBIT_PASSWORD=stack
+SERVICE_PASSWORD=stack
+EOF
+```
+
+#### **D. Lancement de l’installation**
+
+```bash
+./stack.sh
+```
+
+* Durée : \~20-30 minutes selon la machine et la connexion.
+</div>
+
+---
+
+## Installation & premiers pas OpenStack 
+
+### 2. Installation rapide : DevStack
+
+
+<div style="font-size:23px">
+
+### **Étapes de base**
+
+#### **E. Accès post-installation**
+
+* Interface web (Horizon) :
+  http\://\<IP\_VM>:8080
+  (ou parfois :80 selon config)
+
+  * user : `admin`
+  * password : celui défini (`stack` ici)
+* Accès CLI :
+
+  ```bash
+  source openrc admin admin
+  openstack server list
+  ```
 
 </div>
 
 ---
 
-#### Introduction à Twig et création de templates.
+## Installation & premiers pas OpenStack 
 
-##### Introduction à Twig
+### 3. Installation rapide : MicroStack (Ubuntu)
+
+
+<div style="font-size:27px">
+
+### **A. Installation via snap**
+
+```bash
+sudo snap install microstack --devmode --beta
+```
+
+### **B. Initialisation**
+
+```bash
+sudo microstack init --auto --control
+```
+
+### C. Accès 
+
+* Interface web : http\://\<IP\_VM>:80
+* Commandes : `microstack.openstack ...`
+</div>
+
+---
+
+### Installation & premiers pas OpenStack 
+
+#### 4. Connexion au dashboard et à l’API
+
 
 <div style="font-size:18px">
 
-### Création de Templates avec Twig dans Symfony 7
+#### **A. Dashboard Horizon**
 
-Avec Symfony 6, l'utilisation de Twig est intégrée de manière transparente, facilitant la création de systèmes de templates puissants et flexibles. Pour commencer avec Twig dans Symfony, suivez ces étapes :
+* Ouvre ton navigateur sur `http://<adresse IP de ta VM>:8080`
+* Identifie-toi avec `admin` / `stack` (ou ton mot de passe)
 
-1. **Installation** : Twig est inclus par défaut dans les applications Symfony, mais si nécessaire, vous pouvez l'installer ou le mettre à jour via Composer avec `composer require symfony/twig-bundle`.
-   
-2. **Configuration** : Les configurations de Twig peuvent être ajustées dans le fichier `config/packages/twig.yaml` de votre application Symfony, permettant de personnaliser le comportement du moteur de template (comme le répertoire des templates, l'échappement automatique, etc.).
+#### **B. Accès en CLI (Terminal)**
 
-3. **Création de Templates** : Les templates Twig sont généralement stockés dans le répertoire `templates/` de votre application Symfony. Un fichier de template Twig utilise l'extension `.html.twig` et peut contenir à la fois du HTML standard et la syntaxe Twig pour insérer des données dynamiques.
+* Source l’environnement :
 
-4. **Rendu de Templates** : Dans vos contrôleurs Symfony, vous pouvez rendre un template Twig en utilisant la méthode `render()` du contrôleur, en passant le chemin du template et un tableau de données qui seront disponibles dans le template.
+  ```bash
+  source ~/devstack/openrc admin admin
+  ```
+* Quelques commandes utiles :
 
-   ```php
-   return $this->render('mon_template.html.twig', ['maVariable' => $maVariable]);
+  ```bash
+  openstack server list          # Voir les instances
+  openstack image list           # Voir les images
+  openstack network list         # Réseaux
+  openstack flavor list          # Flavors (tailles de VM)
+  ```
+
+#### **C. Accès à l’API (REST)**
+
+* Exemple :
+
+  ```bash
+  curl -i http://<IP_VM>:5000/v3  # Vérifie l’API Keystone (identité)
+  ```
+
+
+</div>
+
+---
+
+
+
+<!-- _class: lead -->
+<!-- _paginate: false -->
+
+## Gestion des machines virtuelles
+
+---
+
+### Gestion des machines virtuelles
+
+#### Présentation de Nova
+
+
+<div style="font-size:23px">
+
+## 1. Rôle
+
+* **Nova** est le **service de gestion du calcul** dans OpenStack.
+* Il orchestre et pilote :
+
+  * Le **lancement des machines virtuelles (VMs)** sur les hyperviseurs (KVM, QEMU, VMware, Hyper-V…).
+  * L’**allocation des ressources** (CPU, RAM, disque).
+  * La **planification (scheduling)** des instances sur les nœuds de calcul.
+  * L’**interaction avec Neutron** (réseau), **Cinder** (stockage bloc) et **Glance** (images).
+</div>
+
+---
+
+### Gestion des machines virtuelles
+
+#### Présentation de Nova
+
+
+<div style="font-size:25px">
+
+## 2. Architecture interne
+
+Nova est composé de plusieurs **services** interconnectés via **RabbitMQ** et **API REST** :
+
+* **nova-api** → Reçoit les requêtes des utilisateurs (REST).
+* **nova-scheduler** → Choisit le nœud de calcul où déployer la VM.
+* **nova-compute** → Déploie la VM sur l’hyperviseur (ex. KVM via libvirt).
+* **nova-conductor** → Fait l’intermédiaire entre DB et compute nodes.
+* **nova-consoleauth / nova-novncproxy** → Gestion de la console distante (VNC, SPICE).
+* **nova-placement** → Service qui gère les ressources disponibles (inventaire CPU/RAM/disk).
+* **Base de données (MariaDB/MySQL)** → Stocke l’état des instances et configurations.
+</div>
+
+---
+
+### Gestion des machines virtuelles
+
+#### Présentation de Nova
+
+
+<div style="font-size:25px">
+
+## 1. Prérequis
+
+* **Services de base déjà installés** :
+
+  * Keystone (identité)
+  * Glance (images)
+  * Neutron (réseau)
+  * RabbitMQ (messagerie)
+  * MariaDB/MySQL (base de données)
+
+* **Réseau** configuré (management, provider, tenant).
+
+* **Hyperviseur** : souvent **KVM/QEMU** sur Linux.
+
+</div>
+
+---
+
+### Gestion des machines virtuelles
+
+#### Présentation de Nova
+
+
+<div style="font-size:23px">
+
+## 2. Étapes d’installation (exemple sur Ubuntu/Debian)
+
+### 🔸 Sur le **contrôleur**
+
+1. **Créer la base de données Nova**
+
+   ```sql
+   CREATE DATABASE nova_api;
+   CREATE DATABASE nova;
+   GRANT ALL PRIVILEGES ON nova_api.* TO 'nova'@'localhost' IDENTIFIED BY 'NOVA_PASS';
+   GRANT ALL PRIVILEGES ON nova.* TO 'nova'@'localhost' IDENTIFIED BY 'NOVA_PASS';
+   FLUSH PRIVILEGES;
+   ```
+
+2. **Créer l’utilisateur Nova dans Keystone**
+
+   ```bash
+   openstack user create --domain default --password NOVA_PASS nova
+   openstack role add --project service --user nova admin
+   openstack service create --name nova --description "OpenStack Compute" compute
+   ```
+</div>
+
+---
+
+### Gestion des machines virtuelles
+
+#### Présentation de Nova
+
+
+<div style="font-size:25px">
+
+## 2. Étapes d’installation (exemple sur Ubuntu/Debian)
+
+### 🔸 Sur le **contrôleur**
+
+3. **Déclarer les endpoints API (public, internal, admin)**
+
+   ```bash
+   openstack endpoint create --region RegionOne compute public http://controller:8774/v2.1
+   openstack endpoint create --region RegionOne compute internal http://controller:8774/v2.1
+   openstack endpoint create --region RegionOne compute admin http://controller:8774/v2.1
+   ```
+
+4. **Installer les paquets Nova**
+
+   ```bash
+   apt install nova-api nova-conductor nova-novncproxy nova-scheduler
    ```
 
 </div>
 
 ---
 
-#### Introduction à Twig et création de templates.
+### Gestion des machines virtuelles
 
-##### Introduction à Twig
-
-<div style="font-size:15px">
+#### Présentation de Nova
 
 
-```twig
-{# templates/products_list.html.twig #}
+<div style="font-size:20px">
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Liste des Produits</title>
-</head>
-<body>
-    <h1>Liste des Produits</h1>
+## 2. Étapes d’installation (exemple sur Ubuntu/Debian)
 
-    {% if products is not empty %}
-        <ul>
-            {% for product in products %}
-                <li>
-                    <strong>{{ product.name }}</strong><br>
-                    Prix: {{ product.price|number_format(2, ',', ' ') }} €<br>
-                    {% if product.inStock %}
-                        <em>En stock</em>
-                    {% else %}
-                        <em>Rupture de stock</em>
-                    {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>Aucun produit disponible.</p>
-    {% endif %}
-</body>
-</html>
-```
+### 🔸 Sur le **contrôleur**
+
+5. **Configurer Nova (`/etc/nova/nova.conf`)**
+   Exemple (partie importante) :
+
+   ```ini
+   [api_database]
+   connection = mysql+pymysql://nova:NOVA_PASS@controller/nova_api
+
+   [database]
+   connection = mysql+pymysql://nova:NOVA_PASS@controller/nova
+
+   [DEFAULT]
+   transport_url = rabbit://openstack:RABBIT_PASS@controller
+   auth_strategy = keystone
+   my_ip = 10.0.0.11   # IP du contrôleur
+   ```
 </div>
 
 ---
 
-#### Introduction à Twig et création de templates.
+### Gestion des machines virtuelles
 
-##### Introduction à Twig
+#### Présentation de Nova
 
-<div style="font-size:26px">
 
-- **Boucle For** : `{% for product in products %}` itère sur chaque élément du tableau `products`. Pour chaque itération, la variable `product` contient l'élément courant du tableau (un produit).
+<div style="font-size:22px">
 
-- **Filtre `number_format`** : `{{ product.price|number_format(2, ',', ' ') }}` formate le prix du produit pour avoir deux chiffres après la virgule, utilise la virgule comme séparateur décimal et un espace pour séparer les milliers. Cela rend le prix plus lisible.
+## 2. Étapes d’installation (exemple sur Ubuntu/Debian)
 
-- **Condition If** : `{% if product.inStock %}` vérifie si le produit est en stock. Selon le résultat, il affiche soit "En stock" soit "Rupture de stock".
+### 🔸 Sur le **contrôleur**
 
-- **Vérification de la vacuité** : `{% if products is not empty %}` vérifie si le tableau `products` n'est pas vide avant d'essayer d'afficher la liste des produits. Si le tableau est vide, il affiche un message indiquant qu'aucun produit n'est disponible.
+5. **Configurer Nova (`/etc/nova/nova.conf`)**
+   Exemple (partie importante) :
 
+   ```ini
+   [keystone_authtoken]
+   www_authenticate_uri = http://controller:5000
+   auth_url = http://controller:5000
+   memcached_servers = controller:11211
+   auth_type = password
+   project_domain_name = Default
+   user_domain_name = Default
+   project_name = service
+   username = nova
+   password = NOVA_PASS
+   ```
 </div>
 
 ---
-#### Introduction à Twig et création de templates.
 
-##### Introduction à Twig
+### Gestion des machines virtuelles
 
-###### Inclusion de Fichiers Statiques
+#### Présentation de Nova
+
 
 <div style="font-size:28px">
 
-- Dans Twig, pour inclure des fichiers statiques comme des fichiers CSS ou JavaScript, vous utilisez généralement la fonction `asset()` dans le cadre d'un projet Symfony. 
-- Cette fonction aide à générer des URL vers des fichiers statiques de manière flexible et sécurisée. 
-- L'usage de `asset()` est particulièrement utile pour gérer les chemins des ressources statiques dans des environnements de développement, de test, et de production, en s'adaptant automatiquement aux configurations spécifiques de chaque environnement.
+## 2. Étapes d’installation (exemple sur Ubuntu/Debian)
 
-</div> 
+### 🔸 Sur le **contrôleur**
 
---- 
-#### Introduction à Twig et création de templates.
+6. **Synchroniser la DB**
 
-##### Introduction à Twig
+   ```bash
+   su -s /bin/sh -c "nova-manage api_db sync" nova
+   su -s /bin/sh -c "nova-manage db sync" nova
+   ```
 
-<div style="font-size:25px">
+7. **Démarrer les services**
 
-**Exemple :**
+   ```bash
+   systemctl restart nova-api nova-scheduler nova-conductor nova-novncproxy
+   ```
+</div>
 
-```twig
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-</head>
-<body>
-    ...
-    <script src="{{ asset('js/script.js') }}"></script>
-</body>
-</html>
-```
+---
 
-Dans cet exemple, `{{ asset('css/style.css') }}` génère le chemin vers le fichier CSS statique, et `{{ asset('js/script.js') }}` fait de même pour un fichier JavaScript. Ces chemins tiendront compte de la configuration de votre projet Symfony, y compris l'emplacement du dossier public et d'éventuels paramètres de versionnement des fichiers.
+### Gestion des machines virtuelles
+
+#### Présentation de Nova
+
+
+<div style="font-size:19px">
+
+### 2. Étapes d’installation (exemple sur Ubuntu/Debian)
+
+#### 🔸 Sur le **nœud de calcul**
+
+1. **Installer les paquets**
+
+   ```bash
+   apt install nova-compute
+   ```
+2. **Configurer `/etc/nova/nova.conf`**
+   Exemple :
+
+   ```ini
+   [DEFAULT]
+   transport_url = rabbit://openstack:RABBIT_PASS@controller
+   auth_strategy = keystone
+   my_ip = 10.0.0.31   # IP du compute node
+   [keystone_authtoken]
+   auth_url = http://controller:5000
+   memcached_servers = controller:11211
+   username = nova
+   password = NOVA_PASS
+   [libvirt]
+   virt_type = kvm
+   ```
 
 </div>
 
 ---
 
-#### Introduction à Twig et création de templates.
+## Gestion des machines virtuelles
 
-##### Introduction à Twig
+### Présentation de Nova
+
+
+<div style="font-size:27px">
+
+## 2. Étapes d’installation (exemple sur Ubuntu/Debian)
+
+### 🔸 Sur le **nœud de calcul**
+
+3. **Redémarrer le service**
+
+   ```bash
+   systemctl restart nova-compute
+   ```
+
+</div>
+
+---
+
+## Gestion des machines virtuelles
+
+### Présentation de Nova
+
+
+<div style="font-size:27px">
+
+## 3. Vérification
+
+* Lister les services Nova :
+
+  ```bash
+  openstack compute service list
+  ```
+* Lancer une instance :
+
+  ```bash
+  openstack server create --flavor m1.small --image cirros \
+    --nic net-id=NETWORK_ID --security-group default --key-name mykey demo-instance
+  ```
+
+</div>
+
+---
+
+## Gestion des machines virtuelles
+
+#### Gestion des images et des instances - Réseau.
+
+
+<div style="font-size:19px">
+
+## Gestion des images (Glance)
+
+## Rôle
+
+* **Glance** est le service d’OpenStack dédié à la **gestion des images systèmes** (Linux, Windows, appliances).
+* Les images servent de **modèles de VM** à déployer via Nova.
+
+## Formats supportés
+
+* RAW, QCOW2 (QEMU/KVM), VMDK (VMware), VHD (Hyper-V), ISO.
+
+## Mise en œuvre
+
+1. **Téléverser une image**
+
+   ```bash
+   openstack image create "Ubuntu-22.04" \
+     --file ubuntu-22.04.qcow2 \
+     --disk-format qcow2 \
+     --container-format bare \
+     --public
+   ```
+</div>
+
+---
+
+## Gestion des machines virtuelles
+
+#### Gestion des images et des instances - Réseau.
+
+
+<div style="font-size:20px">
+
+## Gestion des images (Glance)
+
+## Mise en œuvre
+
+2. **Lister les images disponibles**
+
+   ```bash
+   openstack image list
+   ```
+3. **Mettre à jour les métadonnées** (ex. OS type, archi, taille min RAM/CPU).
+
+## Bonnes pratiques
+
+* Utiliser des **images cloud-ready** (Cloud-init installé).
+* Gérer un **catalogue d’images validées** par l’entreprise.
+* Stocker les images dans **Swift** ou un backend Ceph pour la résilience.
+</div>
+
+---
+
+## Gestion des machines virtuelles
+
+#### Gestion des images et des instances - Réseau.
+
+
+<div style="font-size:24px">
+
+## Gestion des instances (Nova)
+
+## Rôle
+
+* **Nova** crée et gère les **instances (VMs)**.
+* Utilise **Glance** pour l’image, **Neutron** pour le réseau, **Cinder** pour les volumes.
+
+## Mise en œuvre
+
+1. **Créer une paire de clés SSH**
+
+   ```bash
+   openstack keypair create mykey > mykey.pem
+   chmod 600 mykey.pem
+</div>
+
+---
+
+## Gestion des machines virtuelles
+
+#### Gestion des images et des instances - Réseau.
+
+
+<div style="font-size:20px">
+
+## Gestion des instances (Nova)
+
+## Mise en œuvre
+
+2. **Définir un flavor (gabarit de VM)**
+
+   ```bash
+   openstack flavor create --id 1 --ram 2048 --disk 20 --vcpus 2 m1.small
+   ```
+3. **Lancer une instance**
+
+   ```bash
+   openstack server create \
+     --flavor m1.small \
+     --image Ubuntu-22.04 \
+     --nic net-id=NETWORK_ID \
+     --security-group default \
+     --key-name mykey \
+     vm-demo
+   ```
+
+</div>
+
+---
+
+## Gestion des machines virtuelles
+
+#### Gestion des images et des instances - Réseau.
+
+
+<div style="font-size:20px">
+
+## Gestion des instances (Nova)
+
+## Mise en œuvre
+
+4. **Lister et gérer les instances**
+
+   ```bash
+   openstack server list
+   openstack server show vm-demo
+   openstack server stop vm-demo
+   openstack server delete vm-demo
+   ```
+
+## Bonnes pratiques
+
+* Automatiser avec **Heat** (orchestration).
+* Définir des **quotas** par projet pour contrôler l’usage.
+* Sauvegarder des **snapshots** pour réutiliser une VM comme image.
+  
+</div>
+
+---
+
+## Gestion des machines virtuelles
+
+#### Gestion des images et des instances - Réseau.
+
+
+<div style="font-size:20px">
+
+## Gestion du réseau virtuel (Neutron)
+
+## Rôle
+
+* **Neutron** fournit la **connectivité réseau** aux instances.
+* Fonctionne avec des plugins (Open vSwitch, Linux Bridge, OVN, SDN).
+* Gère les **réseaux, sous-réseaux, routeurs, flottants, sécurité**.
+
+## Composants clés
+
+* **Network** : comme un switch virtuel.
+* **Subnet** : plage IP assignée aux instances.
+* **Router** : connecte réseaux internes ↔ externes.
+* **Security groups** : règles firewall (iptables/OVS).
+* **Floating IP** : IP publique NATée vers une VM.
+</div>
+
+---
+
+## Gestion des machines virtuelles
+
+#### Gestion des images et des instances - Réseau.
+
+
+<div style="font-size:24px">
+
+## Gestion du réseau virtuel (Neutron)
+
+## Mise en œuvre
+
+3. **Créer un routeur**
+
+   ```bash
+   openstack router create myrouter
+   openstack router set myrouter --external-gateway public-net
+   openstack router add subnet myrouter private-subnet
+   ```
+4. **Associer une Floating IP**
+
+   ```bash
+   openstack floating ip create public-net
+   openstack server add floating ip vm-demo FLOATING_IP
+   ```
+</div>
+
+---
+
+## Gestion des machines virtuelles
+
+#### Gestion des images et des instances - Réseau.
+
+
+<div style="font-size:28px">
+
+## Gestion du réseau virtuel (Neutron)
+
+### Bonnes pratiques
+
+* Séparer les **réseaux management / data / external**.
+* Mettre en place des **Network Policies (security groups)**.
+* Utiliser **Octavia** si besoin de load balancers.
+* Superviser la charge réseau avec **Ceilometer + Gnocchi**.
+
+</div>
+
+---
+
+## Gestion des machines virtuelles
+
+#### Gestion des images et des instances - Réseau.
+
+
+<div style="font-size:28px">
+
+## Gestion du réseau virtuel (Neutron)
+
+### Bonnes pratiques
+
+* Séparer les **réseaux management / data / external**.
+* Mettre en place des **Network Policies (security groups)**.
+* Utiliser **Octavia** si besoin de load balancers.
+* Superviser la charge réseau avec **Ceilometer + Gnocchi**.
+
+</div>
+
+---
+
+## Gestion des machines virtuelles
+
+#### Gestion d'hyperviseurs multiples
+
+
+<div style="font-size:30px">
+
+### 1.  Rôle des hyperviseurs dans OpenStack
+
+* OpenStack (via **Nova**) **n’exécute pas directement les VM** : il orchestre les **compute nodes** qui utilisent un hyperviseur (libvirt/KVM, ESXi, Hyper-V…).
+* Chaque **nœud de calcul** est associé à un hyperviseur.
+* Nova interagit avec eux via des **drivers** (appelés *virt drivers*).
+
+</div>
+
+---
+
+## Gestion des machines virtuelles
+
+#### Gestion d'hyperviseurs multiples
+
+
+<div style="font-size:25px">
+
+### 2.  Hyperviseurs supportés
+
+OpenStack est **agnostique** à l’hyperviseur grâce à ses drivers. Les principaux sont :
+
+* **KVM/QEMU (libvirt)** → le plus courant, performant et open source.
+* **VMware ESXi** (via `VMwareVCDriver`) → intégré avec vCenter.
+* **Microsoft Hyper-V** (via `HyperVDriver`) → support Windows.
+* **Xen/XenServer** (aujourd’hui moins utilisé).
+* **Baremetal** (Ironic) → provisionnement direct sans hyperviseur.
+* **Containers** (Magnum/Kata) → alternatives modernes.
+
+👉 En pratique : **KVM est le choix par défaut** (Linux + open source), mais OpenStack permet de mélanger.
+
+</div>
+
+---
+
+## Gestion des machines virtuelles
+
+#### Gestion d'hyperviseurs multiples
+
+
+<div style="font-size:25px">
+
+### 3.  Gestion de plusieurs hyperviseurs dans le même cloud
+
+OpenStack permet de gérer plusieurs types d’hyperviseurs **dans le même cluster**.
+
+* Nova détecte l’hyperviseur du nœud (`nova-compute` sur chaque node).
+* L’**administrateur peut définir des “aggregates” et “availability zones”** pour classer les compute nodes (par hyperviseur, CPU, GPU, etc.).
+* Lors du déploiement d’une VM, un **flavor** peut être associé à un **extra spec** pour cibler un type d’hyperviseur.
+
+👉 Exemple :
+
+* `flavor1` → VM sur KVM.
+* `flavor2` → VM sur ESXi.
+
+
+</div>
+
+---
+
+## Gestion des machines virtuelles
+
+#### Gestion d'hyperviseurs multiples
+
+
+<div style="font-size:25px">
+
+### 4.  Configuration des hyperviseurs
+
+## a) **KVM (par défaut, Linux)**
+
+Dans `/etc/nova/nova.conf` :
+
+```ini
+[libvirt]
+virt_type = kvm
+```
+
+Vérifier que l’hôte supporte la virtualisation matérielle (`egrep -c '(vmx|svm)' /proc/cpuinfo`).
+
+
+
+</div>
+
+---
+
+## Gestion des machines virtuelles
+
+#### Gestion d'hyperviseurs multiples
+
+
+<div style="font-size:23px">
+
+### 4.  Configuration des hyperviseurs
+
+### b) **VMware ESXi**
+
+* Nécessite un **vCenter** ou un cluster ESXi.
+* Activer le driver VMware dans `nova.conf` :
+
+```ini
+[DEFAULT]
+compute_driver = vmwareapi.VMwareVCDriver
+
+[vmware]
+host_ip = <VCENTER_IP>
+host_username = <VCENTER_USER>
+host_password = <VCENTER_PASS>
+cluster_name = <VCENTER_CLUSTER>
+```
+
+* Nova utilisera les API vCenter pour gérer les VM.
+
+
+
+</div>
+
+---
+
+## Gestion des machines virtuelles
+
+#### Gestion d'hyperviseurs multiples
+
+
+<div style="font-size:25px">
+
+### 4.  Configuration des hyperviseurs
+
+## c) **Microsoft Hyper-V**
+
+* Installer l’agent **nova-compute-hyperv** sur le serveur Hyper-V (Windows).
+* Dans `nova.conf` :
+
+```ini
+[DEFAULT]
+compute_driver = hyperv.nova.driver.HyperVDriver
+```
+
+* Nécessite `WinRM` et certains rôles Windows activés.
+
+</div>
+
+---
+
+## Gestion des machines virtuelles
+
+#### Gestion d'hyperviseurs multiples
+
+
+<div style="font-size:19px">
+
+### 5.  Bonnes pratiques
+
+* **KVM** → recommandé pour la majorité des déploiements (communauté la plus active, meilleure intégration).
+* **ESXi** → intéressant si l’entreprise a déjà un parc VMware et veut l’intégrer.
+* **Hyper-V** → utile dans les environnements Windows purs.
+* **Multi-hyperviseurs** :
+
+  * Créer des **host aggregates** pour regrouper les nœuds par hyperviseur.
+  * Utiliser des **flavors avec extra\_specs** pour orienter les VM.
+  * Exemple :
+
+    ```bash
+    openstack aggregate create kvm_hosts
+    openstack aggregate set --property hypervisor_type=KVM kvm_hosts
+
+    openstack flavor set m1.kvm --property aggregate_instance_extra_specs:hypervisor_type=KVM
+    ```
+* **Supervision** : utiliser `openstack hypervisor list` pour voir les hôtes disponibles.
+
+</div>
+
+---
+
+## Gestion des machines virtuelles
+
+#### Gestion d'hyperviseurs multiples
+
+
+<div style="font-size:25px">
+
+## En résumé
+
+* **Nova** gère plusieurs hyperviseurs grâce à des drivers.
+* **KVM est le plus utilisé**, mais VMware ESXi et Hyper-V sont supportés.
+* On peut mélanger plusieurs hyperviseurs dans le même cloud → grâce aux **aggregates, zones et flavors**.
+* Le choix dépend du **contexte entreprise** :
+
+  * Open source/Linux → **KVM**
+  * Parc VMware → **ESXi**
+  * Environnement Windows → **Hyper-V**
+
+</div>
+
+---
+
+
+
+<!-- _class: lead -->
+<!-- _paginate: false -->
+
+## Gestion du stockage
+
+---
+
+## Gestion du stockage
+
+### Vue d'ensemble de Swift
+
+
+<div style="font-size:20px">
+
+## OpenStack Swift – Vue d’ensemble
+
+### 1. Rôle
+
+* **Swift** est le service d’**Object Storage** d’OpenStack.
+* Il permet de stocker et de récupérer des objets (fichiers, images, vidéos, backups) dans un espace distribué et hautement disponible.
+* Fonctionne sur le même principe qu’**Amazon S3**.
+* Utilisé pour :
+
+  * Sauvegardes
+  * Archives
+  * Distribution de contenus (CDN)
+  * Backend de stockage pour Glance (images de VM)
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Vue d'ensemble de Swift
+
+
+<div style="font-size:25px">
+
+## OpenStack Swift – Vue d’ensemble
+
+### 2.  Architecture logique
+
+Swift est composé de **deux parties principales** :
+
+### a) **Proxy servers**
+
+* Point d’entrée pour les clients.
+* Reçoivent les requêtes via l’**API REST** (compatible S3).
+* Gèrent l’authentification (via Keystone).
+* Distribuent la requête vers le bon nœud de stockage.
+
+</div>
+
+---
+
+
+## Gestion du stockage
+
+### Vue d'ensemble de Swift
+
+
+<div style="font-size:23px">
+
+## OpenStack Swift – Vue d’ensemble
+
+### 2.  Architecture logique
+
+Swift est composé de **deux parties principales** :
+
+### b) **Storage nodes**
+
+* Stockent physiquement les objets.
+* Trois types de services :
+
+  * **Object server** → stocke les objets.
+  * **Container server** → gère la liste des objets (métadonnées).
+  * **Account server** → gère les comptes/projets et quotas.
+
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Vue d'ensemble de Swift
+
+
+<div style="font-size:26px">
+
+## OpenStack Swift – Vue d’ensemble
+
+### 2.  Architecture logique
+
+### c) **Anneaux (rings)**
+
+* Fichiers de configuration qui indiquent où stocker/récupérer les objets.
+* Gérés par un **ring builder**.
+* Assurent la répartition des données (hashing) et la tolérance aux pannes.
+</div>
+
+---
+
+## Gestion du stockage
+
+### Vue d'ensemble de Swift
+
+
+<div style="font-size:22px">
+
+## OpenStack Swift – Vue d’ensemble
+
+### 3.  Fonctionnement
+
+1. Un client envoie un fichier via l’API Swift (`PUT object`).
+2. Le proxy server :
+
+   * Authentifie la requête via Keystone.
+   * Calcule où placer l’objet dans l’anneau.
+   * Redirige vers les storage nodes concernés.
+3. L’objet est stocké en **plusieurs copies (réplication)** sur différents nœuds.
+4. En cas de panne d’un nœud, une copie est automatiquement restaurée ailleurs.
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Vue d'ensemble de Swift
+
+
+<div style="font-size:21px">
+
+## OpenStack Swift – Vue d’ensemble
+
+### 4.  API et utilisation
+
+### a) Commandes principales
+
+* **Créer un container** (équivalent à un “bucket”) :
+
+  ```bash
+  openstack container create backups
+  ```
+* **Lister les containers** :
+
+  ```bash
+  openstack container list
+  ```
+* **Uploader un fichier** :
+
+  ```bash
+  openstack object create backups /home/user/file.txt
+  ```
+</div>
+
+---
+
+## Gestion du stockage
+
+### Vue d'ensemble de Swift
+
+
+<div style="font-size:21px">
+
+## OpenStack Swift – Vue d’ensemble
+
+### 4.  API et utilisation
+
+### a) Commandes principales
+
+* **Télécharger un objet** :
+
+  ```bash
+  openstack object save backups file.txt
+  ```
+* **Supprimer un objet** :
+
+  ```bash
+  openstack object delete backups file.txt
+  ```
+</div>
+
+---
+
+## Gestion du stockage
+
+### Vue d'ensemble de Swift
+
+
+<div style="font-size:27px">
+
+## OpenStack Swift – Vue d’ensemble
+
+### 4.  API et utilisation
+
+### b) Points forts
+
+* API REST (compatible S3).
+* Multi-tenants (via Keystone).
+* Métadonnées extensibles.
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Vue d'ensemble de Swift
+
+
+<div style="font-size:27px">
+
+## OpenStack Swift – Vue d’ensemble
+
+### 5. Avantages de Swift
+
+* **Scalabilité horizontale** (ajout de nouveaux nœuds sans interruption).
+* **Haute disponibilité** grâce à la réplication automatique.
+* **Pas de SPOF (single point of failure)** : architecture distribuée.
+* **Multi-pétabyte possible**.
+* **Stockage orienté objet** → pratique pour fichiers statiques, médias, archives.
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Vue d'ensemble de Swift
+
+
+<div style="font-size:27px">
+
+## OpenStack Swift – Vue d’ensemble
+
+### 6.  Limites
+
+* Pas adapté pour du **stockage bloc** (VM, bases de données → utiliser **Cinder**).
+* Pas de système de fichiers classique (pas de hiérarchie type ext4/NTFS).
+* Performances moindres que du stockage local pour les petites I/O.
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Vue d'ensemble de Swift
+
+
+<div style="font-size:27px">
+
+## OpenStack Swift – Vue d’ensemble
+
+### En résumé
+
+* **Swift = stockage objet** distribué, tolérant aux pannes, scalable.
+* Composé de **proxy servers, storage nodes et rings**.
+* Permet de gérer **containers et objets** via une API REST.
+* Idéal pour **sauvegardes, archives, médias, CDN**.
+* Peut servir de **backend pour Glance** (stockage des images VM).
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Mise en œuvre de Swift
+
+
+<div style="font-size:27px">
+
+### 1.  Prérequis
+
+* Un cluster OpenStack déjà installé avec **Keystone** (authentification).
+* **RabbitMQ** et **MariaDB** opérationnels.
+* Plusieurs serveurs (ou disques) disponibles pour stocker les objets.
+* Résolution DNS ou fichier `/etc/hosts` configuré (ex : `controller`, `swift-storage1`, etc.).
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Mise en œuvre de Swift
+
+
+<div style="font-size:24px">
+
+### 2.  Architecture cible
+
+* **Controller node** :
+
+  * Proxy Server (entrée des requêtes REST)
+  * Ring builder (génère les anneaux)
+
+* **Storage nodes** :
+
+  * Account server
+  * Container server
+  * Object server
+  * Stockage physique des objets (disques / partitions montées sur `/srv/node/`)
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Mise en œuvre de Swift
+
+
+<div style="font-size:20px">
+
+### 3.  Étapes d’installation
+
+### a) Sur le **controller (proxy node)**
+
+1. **Créer la base de données pour Swift**
+
+   ```sql
+   CREATE DATABASE swift;
+   GRANT ALL PRIVILEGES ON swift.* TO 'swift'@'localhost' IDENTIFIED BY 'SWIFT_PASS';
+   FLUSH PRIVILEGES;
+   ```
+2. **Créer l’utilisateur dans Keystone**
+
+   ```bash
+   openstack user create --domain default --password SWIFT_PASS swift
+   openstack role add --project service --user swift admin
+   openstack service create --name swift --description "OpenStack Object Storage" object-store
+   openstack endpoint create --region RegionOne object-store public http://controller:8080/v1/AUTH_%\(project_id\)s
+   openstack endpoint create --region RegionOne object-store internal http://controller:8080/v1/AUTH_%\(project_id\)s
+   openstack endpoint create --region RegionOne object-store admin http://controller:8080/v1
+   
+</div>
+
+---
+
+## Gestion du stockage
+
+### Mise en œuvre de Swift
+
+
+<div style="font-size:26px">
+
+### 3.  Étapes d’installation
+
+### a) Sur le **controller (proxy node)**
+
+3. **Installer les paquets Swift Proxy**
+
+   ```bash
+   apt install swift swift-proxy python3-swiftclient \
+     python3-keystoneclient python3-keystonemiddleware \
+     memcached
+   ```
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Mise en œuvre de Swift
+
+
+<div style="font-size:20px">
+
+### 3.  Étapes d’installation
+
+#### a) Sur le **controller (proxy node)**
+
+4. **Configurer `/etc/swift/proxy-server.conf`**
+   Exemple minimal :
+
+   ```ini
+   [DEFAULT]
+   bind_port = 8080
+   user = swift
+   swift_dir = /etc/swift
+
+   [pipeline:main]
+   pipeline = catch_errors gatekeeper healthcheck proxy-logging cache authtoken keystoneauth proxy-logging proxy-server
+
+   [app:proxy-server]
+   use = egg:swift#proxy
+   account_autocreate = true
+
+  ##(suite)
+  ```
+</div>
+
+---
+
+
+## Gestion du stockage
+
+### Mise en œuvre de Swift
+
+
+<div style="font-size:20px">
+
+### 3.  Étapes d’installation
+
+#### a) Sur le **controller (proxy node)**
+
+4. **Configurer `/etc/swift/proxy-server.conf`**
+   Exemple minimal :
+    (suite)
+   ```ini
+   [filter:authtoken]
+   paste.filter_factory = keystonemiddleware.auth_token:filter_factory
+   www_authenticate_uri = http://controller:5000
+   auth_url = http://controller:5000
+   project_domain_name = Default
+   user_domain_name = Default
+   project_name = service
+   username = swift
+   password = SWIFT_PASS
+
+   [filter:cache]
+   use = egg:swift#memcache
+   memcache_servers = controller:11211
+
+  ```
+</div>
+
+---
+
+## Gestion du stockage
+
+### Mise en œuvre de Swift
+
+
+<div style="font-size:20px">
+
+### 3.  Étapes d’installation
+
+#### b) Sur les **storage nodes**
+
+1. **Installer Swift et dépendances**
+
+   ```bash
+   apt install swift swift-account swift-container swift-object xfsprogs rsync
+   ```
+
+2. **Préparer les disques**
+   Exemple avec `/dev/sdb` :
+
+   ```bash
+   mkfs.xfs /dev/sdb
+   mkdir -p /srv/node/sdb
+   echo "/dev/sdb /srv/node/sdb xfs noatime,nodiratime,nobarrier,logbufs=8 0 0" >> /etc/fstab
+   mount -a
+   ```
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Mise en œuvre de Swift
+
+
+<div style="font-size:23px">
+
+### 3.  Étapes d’installation
+
+#### b) Sur les **storage nodes**
+
+3. **Configurer rsync** (`/etc/rsyncd.conf`) :
+
+   ```ini
+   uid = swift
+   gid = swift
+   [account]
+   path = /srv/node/
+   read only = false
+   [container]
+   path = /srv/node/
+   read only = false
+   [object]
+   path = /srv/node/
+   read only = false
+   ```
+``
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Mise en œuvre de Swift
+
+
+<div style="font-size:23px">
+
+### 3.  Étapes d’installation
+
+#### c) Création des **rings** (depuis le controller)
+
+* **Account ring** :
+
+  ```bash
+  swift-ring-builder account.builder create 10 3 1
+  swift-ring-builder account.builder add --region 1 --zone 1 --ip 10.0.0.21 --port 6002 --device sdb --weight 100
+  swift-ring-builder account.builder rebalance
+  ```
+* **Container ring** :
+
+  ```bash
+  swift-ring-builder container.builder create 10 3 1
+  swift-ring-builder container.builder add --region 1 --zone 1 --ip 10.0.0.21 --port 6001 --device sdb --weight 100
+  swift-ring-builder container.builder rebalance
+  ```
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Mise en œuvre de Swift
+
+
+<div style="font-size:27px">
+
+### 3.  Étapes d’installation
+
+#### c) Création des **rings** (depuis le controller)
+
+* **Object ring** :
+
+  ```bash
+  swift-ring-builder object.builder create 10 3 1
+  swift-ring-builder object.builder add --region 1 --zone 1 --ip 10.0.0.21 --port 6000 --device sdb --weight 100
+  swift-ring-builder object.builder rebalance
+  ```
+👉 Les fichiers générés (`*.ring.gz`) doivent être copiés sur **tous les nœuds Swift** (`/etc/swift/`).
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Mise en œuvre de Swift
+
+
+<div style="font-size:27px">
+
+### 3.  Étapes d’installation
+
+#### d) Démarrer les services
+
+* Sur le **proxy** :
+
+  ```bash
+  systemctl restart swift-proxy
+  ```
+* Sur les **storage nodes** :
+
+  ```bash
+  systemctl restart swift-account swift-container swift-object
+  ```
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Mise en œuvre de Swift
+
+
+<div style="font-size:21px">
+
+## 4. 🔹 Vérification
+
+* **Lister les containers (buckets)** :
+
+  ```bash
+  openstack container list
+  ```
+* **Créer un container** :
+
+  ```bash
+  openstack container create backups
+  ```
+* **Uploader un objet** :
+
+  ```bash
+  openstack object create backups /etc/hosts
+  ```
+* **Télécharger un objet** :
+
+  ```bash
+  openstack object save backups hosts
+  ```
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Mise en œuvre de Swift
+
+
+<div style="font-size:28px">
+
+### En résumé
+
+* **Swift proxy** : point d’entrée, configuré sur le controller.
+* **Storage nodes** : stockent réellement les objets (account, container, object).
+* **Rings** : déterminent la répartition des données → doivent être identiques sur tous les nœuds.
+* **Keystone** : gère l’authentification des utilisateurs.
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Mise en œuvre et configuration.
+
+
+<div style="font-size:28px">
+
+### En résumé
+
+* **Swift proxy** : point d’entrée, configuré sur le controller.
+* **Storage nodes** : stockent réellement les objets (account, container, object).
+* **Rings** : déterminent la répartition des données → doivent être identiques sur tous les nœuds.
+* **Keystone** : gère l’authentification des utilisateurs.
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Mise en œuvre de Swift
+
+
+<div style="font-size:23px">
+
+### 3.  Étapes d’installation
+
+#### b) Sur les **storage nodes**
+
+4. **Configurer Swift sur chaque service** (`/etc/swift/account-server.conf`, `/etc/swift/container-server.conf`, `/etc/swift/object-server.conf`) :
+   Exemple pour object :
+
+   ```ini
+   [DEFAULT]
+   devices = /srv/node
+   mount_check = true
+   bind_ip = 0.0.0.0
+   bind_port = 6000
+   user = swift
+   swift_dir = /etc/swift
+   ```
+
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Pools de stockage dans OpenStack
+
+
+<div style="font-size:29px">
+
+<br>
+
+Cela touche surtout deux briques :
+
+* **Cinder (Block Storage)** → gestion des **pools de volumes** (LVM, Ceph, NetApp, etc.)
+* **Swift (Object Storage)** → gestion via **anneaux (rings)** et **réplication**
+* (Accessoirement **Nova/Glance** peuvent utiliser ces backends, mais ne gèrent pas directement les pools)
+
+</div>
+
+---
+
+
+## Gestion du stockage
+
+### Pools de stockage dans OpenStack
+
+
+<div style="font-size:23px">
+
+## 1. Pools côté **Cinder** (Block Storage)
+
+###  Qu’est-ce qu’un pool de stockage ?
+
+* Un **pool** regroupe un ensemble de disques ou un backend de stockage.
+* Cinder peut avoir **plusieurs backends** → chacun devient un pool.
+* Exemple :
+
+  * `pool_hdd` (LVM sur HDD → grande capacité, lent)
+  * `pool_ssd` (Ceph SSD → rapide)
+  * `pool_netapp` (NAS ou SAN externe)
+
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Pools de stockage dans OpenStack
+
+
+<div style="font-size:20px">
+
+## 1. Pools côté **Cinder** (Block Storage)
+
+#### Déclaration dans `/etc/cinder/cinder.conf`
+
+Exemple avec deux backends :
+
+```ini
+[DEFAULT]
+enabled_backends = lvm,ceph
+
+[lvm]
+volume_driver = cinder.volume.drivers.lvm.LVMVolumeDriver
+volume_group = cinder-volumes
+volume_backend_name = LVM_POOL
+
+[ceph]
+volume_driver = cinder.volume.drivers.rbd.RBDDriver
+rbd_pool = volumes
+rbd_user = cinder
+rbd_ceph_conf = /etc/ceph/ceph.conf
+volume_backend_name = CEPH_POOL
+```
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Pools de stockage dans OpenStack
+
+
+<div style="font-size:20px">
+
+## 1. Pools côté **Cinder** (Block Storage)
+
+### Association avec des volumes
+
+Quand on crée un volume, on peut cibler un pool précis :
+
+```bash
+openstack volume create --size 20 --type fast_vol myvolume
+```
+
+Ici `fast_vol` est un **volume type** lié au pool `CEPH_POOL`.
+
+###  Bonnes pratiques
+
+* Créer des **volume types** pour orienter les workloads (ex. `gold` = SSD, `silver` = HDD).
+* Surveiller la capacité avec :
+
+  ```bash
+  openstack volume service list
+  cinder pool-list
+  ```
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Pools de stockage dans OpenStack
+
+
+<div style="font-size:25px">
+
+## 2. Pools côté **Swift** (Object Storage)
+
+Swift n’utilise pas le mot "pool", mais fonctionne avec un concept équivalent : **les rings et la réplication**.
+
+### 🔹 Fonctionnement
+
+* Les objets sont stockés sur plusieurs **storage nodes**.
+* Le **ring** (anneau) détermine où un objet doit être placé.
+* Chaque objet est **répliqué N fois** (par défaut 3 copies) sur différents disques/nœuds/zones.
+* Cela assure tolérance aux pannes → si un disque tombe, une copie est recréée ailleurs.
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Pools de stockage dans OpenStack
+
+
+<div style="font-size:25px">
+
+## 2. Pools côté **Swift** (Object Storage)
+
+Swift n’utilise pas le mot "pool", mais fonctionne avec un concept équivalent : **les rings et la réplication**.
+
+###  Exemple de réplication
+
+* Un objet est stocké sur :
+
+  * `swift-storage1:/srv/node/sdb`
+  * `swift-storage2:/srv/node/sdc`
+  * `swift-storage3:/srv/node/sdd`
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Pools de stockage dans OpenStack
+
+
+<div style="font-size:23px">
+
+## 2. Pools côté **Swift** (Object Storage)
+
+Swift n’utilise pas le mot "pool", mais fonctionne avec un concept équivalent : **les rings et la réplication**.
+
+###  Commandes de gestion
+
+* Construire un anneau (ring) :
+
+  ```bash
+  swift-ring-builder object.builder add --region 1 --zone 1 \
+    --ip 10.0.0.21 --port 6000 --device sdb --weight 100
+  swift-ring-builder object.builder rebalance
+  ```
+* Voir l’état des réplicas :
+
+  ```bash
+  swift-recon --replication
+  ````
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Pools de stockage dans OpenStack
+
+
+<div style="font-size:29px">
+
+#### Bonnes pratiques
+
+* Placer les réplicas dans des **zones différentes** (serveurs ou racks différents).
+* Ajuster le **weight** pour équilibrer la charge entre disques.
+* Utiliser un **erasure coding** (au lieu de réplication) pour optimiser la capacité sur gros clusters.
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Pools de stockage dans OpenStack
+
+
+<div style="font-size:29px">
+
+## 3.  Pools dans une architecture OpenStack typique
+
+* **Nova** (Compute) → ne gère pas de pool, mais utilise les volumes de **Cinder**.
+* **Glance** (Images) → peut stocker ses images dans Swift ou Cinder.
+* **Cinder** (Block Storage) → pools = backends (LVM, Ceph, SAN).
+* **Swift** (Object Storage) → pools = rings + réplication.
+</div>
+
+---
+
+## Gestion du stockage
+
+### Pools de stockage dans OpenStack
+
+<div style="font-size:27px">
+
+### En résumé
+
+* **Cinder** : pools = backends de stockage (LVM, Ceph, NetApp, etc.).
+
+  * On les associe à des **volume types** pour orienter les VM.
+* **Swift** : pools implicites via **rings et réplication**.
+
+  * Chaque objet est stocké sur plusieurs disques/nœuds.
+* Gestion des pools = **stratégie de placement + tolérance aux pannes + performance**.
+  
+</div>
+
+---
+
+## Gestion du stockage
+
+### Cinder – Mise en œuvre du stockage bloc
+
+<div style="font-size:27px">
+
+### 1. Rôle
+
+* Fournir des **volumes persistants** (comme des disques durs virtuels).
+* Géré par le **Volume Service (cinder-volume)**.
+* Les volumes peuvent être :
+
+  * **attachés/détachés** à des instances (Nova).
+  * **clonés ou sauvegardés**.
+  * basés sur différents **backends** (LVM, Ceph, NetApp, SAN, etc.).
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Cinder – Mise en œuvre du stockage bloc
+
+<div style="font-size:27px">
+
+### 2.  Architecture Cinder
+
+* **cinder-api** → reçoit les requêtes REST.
+* **cinder-scheduler** → choisit le backend/pool approprié.
+* **cinder-volume** → gère les volumes sur le backend.
+* **cinder-backup** (optionnel) → sauvegarde des volumes.
+* **Base de données (MariaDB)** → stocke la config et état des volumes.
+* **RabbitMQ** → bus de messages entre services.
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Cinder – Mise en œuvre du stockage bloc
+
+<div style="font-size:22px">
+
+### 3.  Mise en œuvre (exemple avec LVM)
+
+### a) Prérequis
+
+* Un nœud de stockage avec un disque libre (`/dev/sdb`).
+* Keystone, RabbitMQ, MariaDB déjà en place.
+
+### b) Sur le **controller node**
+
+1. **Créer la DB Cinder**
+
+   ```sql
+   CREATE DATABASE cinder;
+   GRANT ALL PRIVILEGES ON cinder.* TO 'cinder'@'localhost' IDENTIFIED BY 'CINDER_PASS';
+   GRANT ALL PRIVILEGES ON cinder.* TO 'cinder'@'%' IDENTIFIED BY 'CINDER_PASS';
+   FLUSH PRIVILEGES;
+   ```
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Cinder – Mise en œuvre du stockage bloc
+
+<div style="font-size:22px">
+
+### 3.  Mise en œuvre (exemple avec LVM)
+
+### b) Sur le **controller node**
+
+2. **Créer l’utilisateur Keystone et le service**
+
+   ```bash
+   openstack user create --domain default --password CINDER_PASS cinder
+   openstack role add --project service --user cinder admin
+   openstack service create --name cinderv2 --description "OpenStack Block Storage" volumev2
+   openstack service create --name cinderv3 --description "OpenStack Block Storage" volumev3
+   ```
+
+3. **Créer les endpoints**
+
+   ```bash
+   openstack endpoint create --region RegionOne volumev3 public http://controller:8776/v3/%\(project_id\)s
+   openstack endpoint create --region RegionOne volumev3 internal http://controller:8776/v3/%\(project_id\)s
+   openstack endpoint create --region RegionOne volumev3 admin http://controller:8776/v3/%\(project_id\)s
+   ```
+</div>
+
+---
+
+## Gestion du stockage
+
+#### Cinder – Mise en œuvre du stockage bloc
+
+<div style="font-size:23px">
+
+### b) Sur le **controller node**
+
+4. **Installer les paquets Cinder**
+
+   ```bash
+   apt install cinder-api cinder-scheduler
+   ```
+
+5. **Configurer `/etc/cinder/cinder.conf` (controller)**
+
+   ```ini
+   [database]
+   connection = mysql+pymysql://cinder:CINDER_PASS@controller/cinder
+
+   [DEFAULT]
+   transport_url = rabbit://openstack:RABBIT_PASS@controller
+   auth_strategy = keystone
+   my_ip = 10.0.0.11
+   enabled_backends = lvm
+   glance_api_servers = http://controller:9292
+   ```
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Cinder – Mise en œuvre du stockage bloc
+
+<div style="font-size:25px">
+
+### b) Sur le **controller node**
+
+5. **Configurer `/etc/cinder/cinder.conf` (controller)**
+
+   ```ini
+   [lvm]
+   volume_driver = cinder.volume.drivers.lvm.LVMVolumeDriver
+   volume_group = cinder-volumes
+   iscsi_protocol = iscsi
+   iscsi_helper = tgtadm
+   volume_backend_name = LVM_POOL
+   ```
+6. **Init DB et redémarrage**
+
+   ```bash
+   su -s /bin/sh -c "cinder-manage db sync" cinder
+   systemctl restart cinder-api cinder-scheduler
+   ```
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Cinder – Mise en œuvre du stockage bloc
+
+<div style="font-size:26px">
+
+
+### c) Sur le **storage node**
+
+1. **Installer les paquets**
+
+   ```bash
+   apt install cinder-volume lvm2 tgt
+   ```
+
+2. **Préparer le VG LVM**
+
+   ```bash
+   pvcreate /dev/sdb
+   vgcreate cinder-volumes /dev/sdb
+   ```
+
+
+</div>
+
+---
+
+## Gestion du stockage
+
+#### Cinder – Mise en œuvre du stockage bloc
+
+<div style="font-size:20px">
+
+
+### c) Sur le **storage node**
+
+3. **Configurer `/etc/cinder/cinder.conf` (storage node)**
+
+   ```ini
+   [DEFAULT]
+   transport_url = rabbit://openstack:RABBIT_PASS@controller
+   auth_strategy = keystone
+   my_ip = 10.0.0.31
+   enabled_backends = lvm
+
+   [lvm]
+   volume_driver = cinder.volume.drivers.lvm.LVMVolumeDriver
+   volume_group = cinder-volumes
+   iscsi_protocol = iscsi
+   iscsi_helper = tgtadm
+   volume_backend_name = LVM_POOL
+   ```
+
+4. **Démarrer le service**
+
+   ```bash
+   systemctl restart cinder-volume tgt
+   ```
+
+</div>
+
+---
+
+
+## Gestion du stockage
+
+### Cinder – Mise en œuvre du stockage bloc
+
+<div style="font-size:23px">
+
+## 4.  Vérification
+
+* Vérifier les services :
+
+  ```bash
+  openstack volume service list
+  ```
+* Créer un volume :
+
+  ```bash
+  openstack volume create --size 1 test-vol
+  ```
+* Attacher à une instance :
+
+  ```bash
+  openstack server add volume VM_ID test-vol
+  ```
+* Vérifier :
+
+  ```bash
+  openstack volume list
+  ```
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Cinder – Mise en œuvre du stockage bloc
+
+<div style="font-size:27px">
+
+
+## 5. Bonnes pratiques
+
+* Utiliser **Ceph** au lieu de LVM en production (scalabilité, redondance).
+* Créer plusieurs **volume types** pour orienter les workloads (SSD, HDD, gold, silver).
+* Activer **cinder-backup** pour sauvegarder les volumes vers Swift/Ceph.
+* Surveiller avec :
+
+  ```bash
+  cinder list
+  cinder pool-list
+  ```
+``
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Cinder – Mise en œuvre du stockage bloc
+
+<div style="font-size:27px">
+
+
+# En résumé
+
+* **Cinder = stockage bloc** → volumes persistants, attachables aux VM.
+* **Services principaux** : cinder-api, cinder-scheduler, cinder-volume.
+* **Backends possibles** : LVM (simple), Ceph (production), NetApp/SAN (enterprise).
+* Mise en œuvre = configuration du **controller (API + scheduler)** + **storage node (volume backend)**.
+* Les volumes sont ensuite consommés par **Nova (VMs)**.
+
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Backend supportés par Cinder
+
+<div style="font-size:23px">
+
+
+### 1. Backends logiciels (open source)
+
+* **LVM (Logical Volume Manager)**
+
+  * Backend par défaut, simple à mettre en place.
+  * Fournit des volumes via iSCSI.
+  * Usage : **tests, labs**, pas recommandé en production à grande échelle.
+
+* **Ceph RBD (RADOS Block Device)**
+
+  * Backend le plus utilisé en production.
+  * Fournit des volumes distribués, redondants, scalables.
+  * Intégration native avec Nova, Glance, Cinder.
+  * Usage : **production cloud privé/public**, haute disponibilité.
+
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Backend supportés par Cinder
+
+<div style="font-size:23px">
+
+
+### 2.  Backends matériels (storage enterprise)
+
+Cinder supporte de nombreux **baies de stockage** via des drivers fournis par les constructeurs.
+Exemples :
+
+* **NetApp** (ONTAP, SolidFire, E-Series).
+* **EMC / Dell EMC** (VNX, VMAX, PowerMax, XtremIO).
+* **IBM** (Storwize, Spectrum Scale, DS8000).
+* **Hitachi** (VSP).
+* **Fujitsu ETERNUS**.
+* **Pure Storage FlashArray**.
+
+👉 Ces drivers permettent à OpenStack d’exposer des volumes sur ces systèmes via **iSCSI, FC, NVMe-oF**.
+
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Backend supportés par Cinder
+
+<div style="font-size:23px">
+
+
+### 3.  Backends cloud & virtuels
+
+* **NFS (Network File System)**
+
+  * Stockage via partage NFS.
+  * Utilisé pour des besoins simples, pas toujours optimal pour VM.
+
+* **GlusterFS**
+
+  * Système de fichiers distribué, utilisable comme backend bloc.
+
+* **Sheepdog** (moins utilisé aujourd’hui).
+
+* **DRBD (Distributed Replicated Block Device)**
+
+  * Réplication synchrone des volumes entre nœuds.
+
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Backend supportés par Cinder
+
+<div style="font-size:27px">
+
+
+### 4.  Protocoles de connexion supportés
+
+* **iSCSI** (le plus courant).
+* **Fibre Channel (FC)** pour environnements datacenter.
+* **NVMe over Fabrics (NVMe-oF)** pour très haute performance.
+* **RBD (Ceph)** pour clusters distribués.
+
+
+
+</div>
+
+---
+
+### Gestion du stockage
+
+#### Backend supportés par Cinder
+
+<div style="font-size:19px">
+
+
+### 5.  Multi-backends
+
+Cinder peut gérer plusieurs backends **en parallèle** :
+
+* Exemple dans `/etc/cinder/cinder.conf` :
+
+  ```ini
+  [DEFAULT]
+  enabled_backends = lvm,ceph,netapp
+
+  [lvm]
+  volume_driver = cinder.volume.drivers.lvm.LVMVolumeDriver
+  volume_group = cinder-volumes
+  volume_backend_name = LVM_POOL
+
+  [ceph]
+  volume_driver = cinder.volume.drivers.rbd.RBDDriver
+  rbd_pool = volumes
+  rbd_user = cinder
+  volume_backend_name = CEPH_POOL
+
+  [netapp]
+  volume_driver = cinder.volume.drivers.netapp.common.NetAppDriver
+  netapp_storage_protocol = iscsi
+  netapp_backend_name = NETAPP_POOL
+  ```
+</div>
+
+---
+
+### Gestion du stockage
+
+#### Backend supportés par Cinder
+
+<div style="font-size:28px">
+
+
+## 5.  Multi-backends
+
+* On peut créer des **volume types** liés à chaque backend :
+
+  ```bash
+  openstack volume type create ceph_vol
+  openstack volume type set ceph_vol --property volume_backend_name=CEPH_POOL
+  ```
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Backend supportés par Cinder
+
+<div style="font-size:28px">
+
+
+##  En résumé
+
+* **Backends logiciels** : LVM (simple), Ceph (scalable, production).
+* **Backends matériels** : NetApp, EMC, IBM, Pure Storage, etc.
+* **Backends réseau/FS** : NFS, GlusterFS, DRBD.
+* **Protocoles supportés** : iSCSI, FC, NVMe-oF, RBD.
+* **Multi-backends** possibles → orienter les workloads via des **volume types**.
+
+</div>
+
+---
+
+## Gestion du stockage
+
+### Backend supportés par Cinder
+
+<div style="font-size:28px">
+
+
+##  En résumé
+
+* **Backends logiciels** : LVM (simple), Ceph (scalable, production).
+* **Backends matériels** : NetApp, EMC, IBM, Pure Storage, etc.
+* **Backends réseau/FS** : NFS, GlusterFS, DRBD.
+* **Protocoles supportés** : iSCSI, FC, NVMe-oF, RBD.
+* **Multi-backends** possibles → orienter les workloads via des **volume types**.
+
+</div>
+
+---
+
+
+
+<!-- _class: lead -->
+<!-- _paginate: false -->
+
+## Gestion des images
+
+---
+
+## Gestion des images
+
+### Qu’est-ce qu’une image ?
+
+<div style="font-size:27px">
+
+
+## 1. Définition
+
+* Une **image** est un **modèle de machine virtuelle** :
+
+  * Un fichier qui contient un **système d’exploitation préinstallé** (Linux, Windows, BSD, etc.), éventuellement avec des logiciels ou configurations spécifiques.
+  * C’est la **base** utilisée par **Nova (Compute)** pour créer une **instance** (VM).
+* Dans OpenStack, les images sont gérées par le service **Glance**.
+
+</div>
+
+---
+
+
+## Gestion des images
+
+### Qu’est-ce qu’une image ?
+
+<div style="font-size:27px">
+
+
+## 2.  Rôle d’une image
+
+* **Point de départ d’une VM** : quand tu lances une instance, Nova prend l’image choisie (par ex. "Ubuntu 22.04 cloud") et la déploie sur l’hyperviseur.
+* **Standardisation** : permet d’avoir des environnements identiques pour tous les utilisateurs.
+* **Gain de temps** : pas besoin d’installer l’OS manuellement.
+* **Automatisation** : certaines images sont préparées avec **Cloud-init**, ce qui permet de personnaliser (hostname, clés SSH, scripts) au boot.
+
+
+</div>
+
+---
+
+## Gestion des images
+
+### Qu’est-ce qu’une image ?
+
+<div style="font-size:27px">
+
+
+## 3.  Formats d’images supportés
+
+OpenStack/Glance supporte plusieurs formats :
+
+* **QCOW2** (QEMU/KVM) → très utilisé, supporte la compression et snapshots.
+* **RAW** → format brut, rapide mais volumineux.
+* **VMDK** → utilisé par VMware.
+* **VHD / VHDX** → utilisé par Hyper-V.
+* **ISO** → installation classique (comme un CD/DVD).
+
+
+</div>
+
+---
+
+## Gestion des images
+
+### Qu’est-ce qu’une image ?
+
+<div style="font-size:29px">
+
+
+## 4.  Types d’images
+
+* **OS de base** : Ubuntu, CentOS, Windows, Debian, etc.
+* **Images customisées** : ajout d’applications (ex : "Ubuntu + Apache + MySQL").
+* **Snapshots** : captures d’une instance existante → réutilisable comme nouvelle image.
+
+
+
+</div>
+
+---
+
+## Gestion des images
+
+### Qu’est-ce qu’une image ?
+
+<div style="font-size:20px">
+
+
+### 5. Exemple de gestion (CLI)
+
+* **Lister les images disponibles** :
+
+  ```bash
+  openstack image list
+  ```
+* **Importer une image** (ex : Ubuntu QCOW2) :
+
+  ```bash
+  openstack image create "Ubuntu-22.04" \
+    --file ubuntu-22.04.qcow2 \
+    --disk-format qcow2 \
+    --container-format bare \
+    --public
+  ```
+* **Utiliser une image pour lancer une VM** :
+
+  ```bash
+  openstack server create --flavor m1.small --image Ubuntu-22.04 \
+    --nic net-id=private-net vm1
+  ```
+
+
+</div>
+
+---
+
+## Gestion des images
+
+### Qu’est-ce qu’une image ?
+
+<div style="font-size:29px">
+
+
+##  Synthèse
+
+* Une **image = modèle de VM** contenant un système d’exploitation (et éventuellement des logiciels).
+* Les images sont gérées par **Glance**.
+* Elles servent à **créer des instances** via Nova.
+* Formats courants : **QCOW2, RAW, VMDK, VHD, ISO**.
+* On peut créer ses propres images ou utiliser des images officielles.
+
+
+</div>
+
+---
+
+## Gestion des images
+
+### OpenStack Glance – Gestion des images
+
+<div style="font-size:24px">
+
+
+### 1.  Rôle de Glance
+
+* **Glance** est le service OpenStack chargé de la **gestion des images disque** (modèles de VM).
+* Il fournit une **API REST** pour :
+
+  * Stocker, retrouver et distribuer des images.
+  * Servir de source pour **Nova (Compute)** lorsqu’une instance est créée.
+  * Être backend pour **Cinder (snapshots)** ou **Swift (stockage objet)**.
+
+👉 Sans Glance, Nova ne saurait pas d’où prendre les systèmes d’exploitation pour créer les instances.
+
+
+</div>
+
+---
+
+## Gestion des images
+
+### OpenStack Glance – Gestion des images
+
+<div style="font-size:20px">
+
+
+### 2. 🔹 Fonctionnalités principales
+
+* **Gestion des images OS** (Ubuntu, CentOS, Windows, etc.).
+* **Support de plusieurs formats** : QCOW2, RAW, VMDK, VHD, ISO.
+* **Métadonnées** : chaque image contient des infos (taille min RAM, architecture CPU, OS type, etc.).
+* **Snapshots** : possibilité de capturer l’état d’une VM et de l’enregistrer comme image réutilisable.
+* **Partage** : images privées (par projet) ou publiques (pour tous).
+* **Backends multiples** :
+
+  * Swift (Object Storage)
+  * Cinder (Block Storage)
+  * Filesystem (local)
+  * Ceph RBD
+
+
+
+</div>
+
+---
+
+## Gestion des images
+
+### OpenStack Glance – Gestion des images
+
+<div style="font-size:29px">
+
+
+### 3.  Architecture de Glance
+
+Glance est composé de plusieurs services :
+
+* **glance-api** → reçoit les requêtes des utilisateurs (upload, download, list).
+* **glance-registry** *(déprécié)* → stockait les métadonnées (intégré dans API désormais).
+* **Base de données** → enregistre les métadonnées des images (nom, format, taille, propriétaire).
+* **Backend de stockage** → stocke réellement les fichiers (Swift, Ceph, LVM, FS).
+
+
+
+
+</div>
+
+---
+
+## Gestion des images
+
+### OpenStack Glance – Gestion des images
+
+<div style="font-size:27px">
+
+
+### 4.  Exemple de cycle de vie d’une image
+
+1. L’administrateur **importe une image** (ex : Ubuntu-22.04.qcow2) dans Glance.
+2. Glance **stocke le fichier** dans un backend (ex : Swift).
+3. L’utilisateur demande à Nova de **lancer une VM** avec cette image.
+4. Nova récupère l’image auprès de Glance → la déploie sur l’hyperviseur.
+5. L’utilisateur peut faire un **snapshot de la VM** → enregistré comme nouvelle image dans Glance.
+
+
+
+
+
+</div>
+
+---
+
+### Gestion des images
+
+#### OpenStack Glance – Gestion des images
+
+<div style="font-size:19px">
+
+
+### 5.  Commandes principales (CLI)
+
+* **Lister les images disponibles**
+
+  ```bash
+  openstack image list
+  ```
+* **Créer une nouvelle image**
+
+  ```bash
+  openstack image create "Ubuntu-22.04" \
+    --file ubuntu-22.04.qcow2 \
+    --disk-format qcow2 \
+    --container-format bare \
+    --public
+  ```
+* **Montrer les détails d’une image**
+
+  ```bash
+  openstack image show Ubuntu-22.04
+  ```
+* **Supprimer une image**
+
+  ```bash
+  openstack image delete Ubuntu-22.04
+  ```
+
+
+</div>
+
+---
+
+## Gestion des images
+
+### OpenStack Glance – Gestion des images
+
+<div style="font-size:28px">
+
+
+### 6.  Cas d’usage
+
+* **Catalogue d’OS validés** pour les projets (ex : Ubuntu, CentOS, Windows Server).
+* **Snapshots utilisateurs** pour sauvegarder ou cloner une VM.
+* **Golden images** préinstallées avec logiciels d’entreprise (middleware, DB, outils de dev).
+* **CI/CD** : préparation d’images customisées pour automatiser les déploiements.
+
+
+</div>
+
+---
+
+## Gestion des images
+
+### OpenStack Glance – Gestion des images
+
+<div style="font-size:28px">
+
+
+###  En résumé
+
+* **Glance = brique de gestion des images dans OpenStack**.
+* Stocke, catalogue et distribue les images pour Nova, Cinder, Swift.
+* Supporte plusieurs **formats** et **backends** (Swift, Ceph, FS, Cinder).
+* Gère **images OS, snapshots et golden images**.
+
+
+</div>
+
+---
+
+## Gestion des images
+
+### Mise en œuvre et configuration de Glance
+
+<div style="font-size:24px">
+
+
+### 2.  Création de l’utilisateur et du service dans Keystone
+
+Toujours sur le **Controller** :
+
+```bash
+# Créer l’utilisateur glance
+openstack user create --domain default --password GLANCE_PASS glance
+
+# Lui donner les droits admin sur le projet "service"
+openstack role add --project service --user glance admin
+
+# Créer le service Glance
+openstack service create --name glance --description "OpenStack Image" image
+
+# Créer les endpoints (public, internal, admin)
+openstack endpoint create --region RegionOne image public   http://controller:9292
+openstack endpoint create --region RegionOne image internal http://controller:9292
+openstack endpoint create --region RegionOne image admin    http://controller:9292
+```
+
+</div>
+
+---
+
+## Gestion des images
+
+### Mise en œuvre et configuration de Glance
+
+<div style="font-size:29px">
+
+
+### 3. 🔹 Installation des paquets
+
+Sur le **Controller node** :
+
+```bash
+apt install glance
+```
+
+
+
+</div>
+
+---
+
+
+## Gestion des images
+
+### Mise en œuvre et configuration de Glance
 
 <div style="font-size:16px">
 
-### Extends dans Twig
+# 4. 🔹 Configuration de Glance
 
-- L'héritage de templates (`extends`) dans Twig permet de construire une base de template qui peut être étendue ou surchargée par d'autres templates
-- Cela facilite la réutilisation de portions communes de votre site web (comme l'en-tête, le pied de page, la barre latérale, etc.) sans duplication de code.
+Éditer `/etc/glance/glance-api.conf` :
 
-```twig
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{% block title %}Mon Site Web{% endblock %}</title>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-</head>
-<body>
-    <header>
-        {% block header %}Entête du site{% endblock %}
-    </header>
+```ini
+[database]
+connection = mysql+pymysql://glance:GLANCE_PASS@controller/glance
 
-    <div id="content">
-        {% block content %}Contenu principal ici{% endblock %}
-    </div>
+[keystone_authtoken]
+www_authenticate_uri = http://controller:5000
+auth_url = http://controller:5000
+memcached_servers = controller:11211
+auth_type = password
+project_domain_name = Default
+user_domain_name = Default
+project_name = service
+username = glance
+password = GLANCE_PASS
 
-    <footer>
-        {% block footer %}Pied de page du site{% endblock %}
-    </footer>
-</body>
-</html>
+[paste_deploy]
+flavor = keystone
+
+[glance_store]
+stores = file,http
+default_store = file
+filesystem_store_datadir = /var/lib/glance/images/
 ```
 
+
 </div>
 
 ---
 
-#### Introduction à Twig et création de templates.
+## Gestion des images
 
-##### Introduction à Twig
+### Mise en œuvre et configuration de Glance
 
-<div style="font-size:25px">
+<div style="font-size:35px">
 
-**Template enfant :**
+### 5.  Synchronisation de la base de données
 
-```twig
-{% extends 'base.html.twig' %}
-
-{% block title %}Page d'Accueil{% endblock %}
-
-{% block content %}
-    <h1>Bienvenue sur notre site !</h1>
-    <p>Voici le contenu spécifique de la page d'accueil.</p>
-{% endblock %}
+```bash
+su -s /bin/sh -c "glance-manage db_sync" glance
 ```
 
-- Dans cet exemple, le template enfant `extends` le template de base `base.html.twig`. 
-- Il redéfinit les blocs `title` et `content` pour personnaliser le titre de la page et le contenu principal, respectivement. 
-- Les blocs `header` et `footer` ne sont pas redéfinis dans cet exemple, donc ils hériteront du contenu par défaut défini dans le template de base.
+### 6.  Démarrage et activation des services
 
-</div>
-
-
----
-
-#### Services et conteneur de services
-
-##### Services : Définition
-
-<div style="font-size:29px">
-
-- Un service dans Symfony est simplement un objet PHP qui effectue une certaine tâche. 
-- Cela peut être n'importe quoi, d'un objet qui envoie des e-mails, à un objet qui génère des formulaires, ou même un objet qui effectue des calculs complexes. 
-- L'idée est de centraliser une fonctionnalité dans un service pour pouvoir la réutiliser facilement dans différentes parties de l'application.
-
-- Les services sont souvent utilisés pour encapsuler la logique métier ou les fonctionnalités qui sont utilisées à plusieurs endroits dans l'application, rendant le code plus modulaire, réutilisable et facile à tester.
-
-</div>
-
----
-
-#### Services et conteneur de services
-
-##### Conteneur de Services : Définition
-
-<div style="font-size:29px">
-
-- Le conteneur de services, souvent simplement appelé "le conteneur", est un objet qui sait comment instancier et gérer les services. 
-- Il permet de centraliser la configuration des services de votre application, et s'occupe de l'injection de dépendances, ce qui signifie qu'il fournit automatiquement aux services tout ce dont ils ont besoin pour fonctionner.
-
-- Lorsque vous demandez un service au conteneur, celui-ci s'assure que toutes les dépendances du service sont satisfaites, instancie le service si ce n'est pas déjà fait, et vous le retourne. 
-- Cela simplifie grandement la gestion des dépendances dans votre application.
-
-</div>
-
----
-
-#### Services et conteneur de services
-
-##### Utilisation Basique dans les Contrôleurs
-
-<div style="font-size:22px">
-
-#### Injection de Dépendances
-
-**Exemple avec le constructeur :**
-
-```php
-use App\Service\MonService; // Assurez-vous d'importer votre service
-
-class MonController extends AbstractController
-{
-    private $monService;
-
-    public function __construct(MonService $monService)
-    {
-        $this->monService = $monService;
-    }
-
-    public function index()
-    {
-        $resultat = $this->monService->faireQuelqueChose();
-
-    }
-}
+```bash
+systemctl restart glance-api
+systemctl enable glance-api
 ```
 
-</div>
 
----
-
-#### Services et conteneur de services
-
-##### Utilisation Basique dans les Contrôleurs
-
-<div style="font-size:30px">
-<br>
-
-**Exemple avec l'injection dans les méthodes d'action :**
-
-```php
-use App\Service\MonService; // Assurez-vous d'importer votre service
-
-class MonController extends AbstractController
-{
-    public function index(MonService $monService)
-    {
-        $resultat = $monService->faireQuelqueChose();
-
-        // Utilisez $resultat pour quelque chose
-    }
-}
-```
 
 </div>
 
 ---
 
-#### Doctrine ORM et Formulaires
+### Gestion des images
 
-##### Doctrine ORM
+#### Mise en œuvre et configuration de Glance
 
-<div style="font-size:25px">
+<div style="font-size:21px">
 
-- **Doctrine ORM (Object-Relational Mapping)** est une bibliothèque pour gérer les bases de données dans les applications PHP. 
-  
-- Elle permet aux développeurs de travailler avec des bases de données en utilisant des objets PHP, ce qui facilite l'interaction avec la base de données de manière plus intuitive et orientée objet.
+#### 7. 🔹 Vérification
+
+* **Lister les images** (doit être vide au début) :
+
+  ```bash
+  openstack image list
+  ```
+
+* **Ajouter une image (ex : Cirros, petite image de test)** :
+
+  ```bash
+  wget http://download.cirros-cloud.net/0.5.2/cirros-0.5.2-x86_64-disk.img
+
+  openstack image create "cirros" \
+    --file cirros-0.5.2-x86_64-disk.img \
+    --disk-format qcow2 \
+    --container-format bare \
+    --public
+  ```
+
+* **Vérifier** :
+
+  ```bash
+  openstack image list
+  ```
 
 
-- **Abstraction de la base de données :** Doctrine fournit une couche d'abstraction qui vous permet de travailler avec différents types de bases de données (comme MySQL, PostgreSQL, SQLite, etc.) de manière transparente, sans avoir à modifier votre code en fonction de la base de données spécifique que vous utilisez.
-
-- **Travail avec des objets :** Au lieu d'écrire des requêtes SQL brutes, vous travaillez avec des objets PHP représentant vos tables de base de données. Ces objets, appelés entités, sont des classes PHP que vous définissez pour chaque table de votre base de données.
 
 </div>
 
 ---
 
-#### Doctrine ORM et Formulaires
+### Gestion des images
 
-##### Doctrine ORM
+#### Mise en œuvre et configuration de Glance
 
 <div style="font-size:28px">
 
-- **DQL (Doctrine Query Language) :** Doctrine dispose de son propre langage de requête, le DQL, qui est une abstraction au-dessus de SQL. Le DQL permet de réaliser des requêtes sur les entités et leurs relations d'une manière qui est cohérente avec la programmation orientée objet.
+###  En résumé
 
-- **Migrations :** Doctrine offre un système de migrations, vous permettant de versionner et de partager la structure de votre base de données. Cela facilite les modifications de schéma de base de données au fil du temps et entre différents environnements de développement.
+1. **Créer la DB MySQL/MariaDB** pour Glance.
+2. **Créer l’utilisateur/service** dans Keystone + endpoints.
+3. **Installer Glance** et configurer `glance-api.conf`.
+4. **Choisir un backend de stockage** (filesystem, Swift, Ceph, etc.).
+5. **Synchroniser la DB** et démarrer le service.
+6. **Vérifier avec une image de test** (Cirros).
+
+
 
 </div>
 
 ---
 
-#### Doctrine ORM et Formulaires
+### Gestion des images
 
-##### Doctrine ORM
+#### Gestion du stockage des images dans OpenStack (Glance)
 
-<div style="font-size:18px">
+<div style="font-size:22px">
 
-- **Data Mapping :** Doctrine vous permet de définir des mappings entre vos classes PHP et les tables de base de données. Ces mappings peuvent être définis avec des annotations, des fichiers XML, ou YAML.
+### 1.  Où sont stockées les images ?
 
-- **Gestion des relations :** Doctrine ORM gère tous les types de relations entre les tables (comme One-To-One, One-To-Many, Many-To-One, et Many-To-Many) et permet de naviguer entre les objets associés de manière très simple.
+Glance ne stocke pas toujours les images lui-même : il sert de **catalogue** et délègue le stockage à des backends appelés **Glance Stores**.
 
-```php
-// src/Entity/Product.php
-namespace App\Entity;
+### Backends supportés :
 
-use Doctrine\ORM\Mapping as ORM;
+* **File (Filesystem local)** → simple, utilisé pour labs/tests
+  → `/var/lib/glance/images/` sur le controller.
+* **Swift (Object Storage)** → scalable, HA, production.
+* **Ceph RBD** → backend recommandé en production, intégré avec Nova et Cinder.
+* **Cinder** → stockage bloc (moins utilisé comme backend d’images).
+* **HTTP/HTTPS** → images disponibles via une URL distante.
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="product")
- */
-class Product
-{
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue
-     */
-    private $id;
+👉 Le choix dépend du **niveau de production** et du **volume attendu**.
 
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $name;
 
-    // getters et setters...
-}
-```
 
 </div>
 
---- 
+---
 
-### Doctrine ORM et Formulaires
+### Gestion des images
 
-##### Doctrine ORM
+#### Gestion du stockage des images dans OpenStack (Glance)
 
-<br>
+<div style="font-size:22px">
 
-<div style="font-size:34px">
+### 2. 🔹 Gestion dans Glance
 
-- **Configuration :** Configurez votre connexion à la base de données dans le fichier `.env` de Symfony.
-- **Création d'entités :** Utilisez la commande `php bin/console make:entity` pour générer des entités basées sur vos tables de base de données.
-- **Interactions avec la base de données :** Utilisez le gestionnaire d'entités pour créer, lire, mettre à jour et supprimer des données.
+* **Import** d’une image : via CLI/API, Glance stocke l’image dans son backend et enregistre ses métadonnées.
+* **Catalogage** : chaque image possède des métadonnées (OS type, architecture, min RAM/CPU, propriétaire, visibilité publique/privée).
+* **Distribution** : quand Nova lance une instance, il demande l’image à Glance → l’hyperviseur la récupère du backend.
+* **Snapshots** : une VM existante peut être transformée en image Glance pour réutilisation.
+
+Exemple :
+
+```bash
+openstack image create "Ubuntu-22.04" \
+  --file ubuntu-22.04.qcow2 \
+  --disk-format qcow2 \
+  --container-format bare \
+  --public
+```
+
+
+</div>
+
+---
+
+## Gestion des images
+
+#### Gestion du stockage des images dans OpenStack (Glance)
+
+<div style="font-size:25px">
+
+## 3 - Gestion des images EC2 (AMI)
+
+### 1.  Rappel : qu’est-ce qu’une AMI ?
+
+* Dans AWS EC2, une **AMI (Amazon Machine Image)** est l’équivalent d’une **image Glance** :
+
+  * Un modèle d’OS (ex. Amazon Linux, Ubuntu, Windows).
+  * Contient des métadonnées : type d’archi, volume root, permissions.
+* Permet de lancer des **instances EC2**.
+
+
+
+</div>
+
+---
+
+## Gestion des images
+
+#### Gestion du stockage des images dans OpenStack (Glance)
+
+<div style="font-size:23px">
+
+## 3 - Gestion des images EC2 (AMI)
+
+### 2.  Différences avec Glance
+
+* **Glance (OpenStack)** → supporte des formats génériques : QCOW2, RAW, VMDK, ISO.
+* **EC2 (AWS)** → AMI est liée à EBS (Elastic Block Store) ou à un snapshot S3.
+* **Visibilité** :
+
+  * AMI peut être privée, partagée à un compte, ou publique.
+  * Glance fait pareil : `--public`, `--private`, `--shared`.
+
+
+
+
+</div>
+
+---
+
+### Gestion des images
+
+#### Gestion du stockage des images dans OpenStack
+
+<div style="font-size:19px">
+
+## 3 - Gestion des images EC2 (AMI)
+
+#### 3. 🔹 Compatibilité OpenStack ↔ EC2
+
+Historiquement, OpenStack proposait une **EC2 API** (deprecated), permettant :
+
+* D’importer/exporter des AMI.
+* D’offrir une compatibilité partielle avec des outils AWS.
+
+Aujourd’hui :
+
+* On peut **convertir une AMI en QCOW2 ou RAW** pour l’utiliser avec Glance.
+* Outils utilisés : `qemu-img`
+
+  ```bash
+  qemu-img convert -f vmdk -O qcow2 my-ec2-ami.vmdk my-openstack-image.qcow2
+  ```
+* Puis importer dans Glance :
+
+  ```bash
+  openstack image create "EC2-imported" \
+    --file my-openstack-image.qcow2 \
+    --disk-format qcow2 \
+    --container-format bare \
+    --public
+  ```
+
+
+
+</div>
+
+---
+
+### Gestion des images
+
+#### Gestion du stockage des images dans OpenStack
+
+<div style="font-size:22px">
+
+### En résumé
+
+* **Glance** gère les images OpenStack et s’appuie sur des **backends (file, Swift, Ceph, Cinder)** pour leur stockage.
+* Une **image Glance** = modèle de VM (équivalent d’une **AMI EC2**).
+* Les deux assurent :
+
+  * **Import/export d’OS**
+  * **Stockage des métadonnées**
+  * **Gestion des permissions**
+* Différence clé :
+
+  * **OpenStack Glance** → multi-formats, multi-backends.
+  * **AWS AMI** → format propriétaire, étroitement lié à EBS/S3.
+
+
 
 </div>
 
@@ -955,1603 +3709,769 @@ class Product
 <!-- _class: lead -->
 <!-- _paginate: false -->
 
-## AssetMapper
+## Gestion du réseau
 
 ---
 
-## AssetMapper
+### Gestion du réseau
 
-#### Definition
-
-
-
-<div style="font-size:34px">
-
-- **AssetMapper** est une fonctionnalité introduite dans **Symfony 6.3** pour simplifier la gestion des assets front-end (CSS, JavaScript, images, etc.) dans vos applications Symfony. 
-- Elle permet de remplacer des outils comme Webpack Encore dans des cas simples où il n’est pas nécessaire d'utiliser un outil de build complet. 
-- Cela offre une approche plus légère et native pour gérer vos fichiers statiques.
-
-</div>
-
----
-
-## AssetMapper
-
-#### À quoi sert AssetMapper ?
-
-
+#### Vue d'ensemble de la brique Neutron
 
 <div style="font-size:19px">
 
-1. **Gestion simplifiée des assets :**  
-   Permet de gérer les fichiers CSS, JS, images, et autres ressources statiques directement sans avoir recours à des outils de compilation complexes.
+* **Neutron** est la **brique réseau** d’OpenStack (anciennement Quantum).
+* Fournit du **Network-as-a-Service (NaaS)** aux autres services OpenStack.
+* Objectif : permettre aux utilisateurs de créer et gérer **leurs propres réseaux virtuels** de manière isolée et multi-tenant.
 
-2. **Mapping des fichiers sources :**  
-   Les fichiers situés dans des répertoires comme `assets/` sont automatiquement copiés vers le répertoire `public/` en conservant une structure organisée.
+####  Fonctionnalités
 
-3. **Versionnement et cache-busting :**  
-   Génère des URLs versionnées (avec des hash) pour forcer le navigateur à récupérer la dernière version d’un fichier lorsque celui-ci est modifié.
+* Création de **réseaux privés et externes**.
+* Gestion des **sous-réseaux** (subnets, DHCP, DNS).
+* **Routage virtuel** (L3 agent).
+* **Security groups** (pare-feu distribué).
+* **Floating IPs** pour exposer une VM.
+* Support de **VLAN, VXLAN, GRE** pour l’isolation.
+* Extensions : **LBaaS (Octavia)**, **FWaaS**, **VPNaaS**.
 
-4. **Interopérabilité avec Twig et Symfony UX :**  
-   Permet d’intégrer facilement des assets dans vos vues Twig ou vos composants UX grâce à des fonctions intégrées.
+👉 **Neutron = le SDN d’OpenStack**.
 
-5. **Optimisation des performances :**  
-   Gère automatiquement la minification des fichiers CSS et JS si nécessaire.
+
 
 </div>
 
 ---
 
-## AssetMapper
+### Gestion du réseau
 
-#### Comment fonctionne AssetMapper ?
+#### Switchs virtuels avec Open vSwitch (OVS)
+
+<div style="font-size:21px">
 
 
+* **Open vSwitch (OVS)** est le switch logiciel utilisé par Neutron (plugin ML2).
+* Rôle : connecter les interfaces des VMs, gérer les VLAN/VXLAN, appliquer les règles de sécurité.
 
-<div style="font-size:26px">
+####  Bridges principaux
 
-1. **Structure des fichiers :**  
-   - Les fichiers statiques (CSS, JS, images, polices) sont stockés dans un répertoire `assets/` ou un chemin configuré dans le fichier `config/packages/asset_mapper.yaml`.
+* **br-int** → switch central, connecte les VM locales.
+* **br-tun** → gère les tunnels VXLAN/GRE entre nœuds compute.
+* **br-ex** → connecte les réseaux internes vers l’extérieur (Internet, LAN).
 
-2. **Configuration minimale :**  
-   Par défaut, AssetMapper est configuré pour mapper les fichiers de `assets/` vers `public/assets/`.
+####  Fonctionnement
 
-   Exemple de configuration dans `asset_mapper.yaml` :
-   ```yaml
-   asset_mapper:
-       paths:
-           'assets': ~ # Définit le dossier source des assets
-   ```
+1. La VM crée une interface virtuelle **tap-xxx** connectée à `br-int`.
+2. OVS commute le trafic local ou l’envoie via **VXLAN/GRE** sur `br-tun`.
+3. Si destination = Internet → passe par `br-ex`.
+
+👉 OVS rend possible la **connectivité multi-tenant** sans interférence entre projets.
+
+
 </div>
 
 ---
 
-## AssetMapper
+## Gestion du réseau
 
-#### Comment fonctionne AssetMapper ?
+### Topologies de réseau Cloud
+
+<div style="font-size:25px">
+
+###  Flat Network
+
+* Toutes les VMs partagent le même réseau physique.
+* Simple, mais pas d’isolation.
+* Usage : lab, démo.
+
+###  VLAN
+
+* Isolation via VLAN tags (802.1Q).
+* Limité à **4096 VLANs**.
+* Usage : cloud privé classique.
 
 
+
+</div>
+
+---
+
+## Gestion du réseau
+
+### Topologies de réseau Cloud
+
+<div style="font-size:25px">
+
+
+
+###  Overlay (VXLAN/GRE)
+
+* Encapsulation L2 sur L3.
+* Jusqu’à **16 millions de réseaux isolés**.
+* Usage : clouds publics/multi-tenant (standard OpenStack).
+
+###  Modèle typique OpenStack
+
+* **Réseau privé tenant** (isolé par VXLAN).
+* **Routeur Neutron** pour accéder à un **réseau externe**.
+* **Floating IP** pour exposer une VM au public
+
+
+</div>
+
+---
+
+## Gestion du réseau
+
+### Daemon de routage (L3 agent)
+
+<div style="font-size:23px">
+
+
+###  Rôle
+
+* Le **neutron-l3-agent** fournit :
+
+  * Routage entre subnets.
+  * NAT (SNAT/DNAT) pour Internet.
+  * Gestion des Floating IP.
+
+###  Fonctionnement
+
+* Chaque routeur Neutron = **namespace Linux (`qrouter-xxx`)**.
+* Interfaces internes → réseaux privés.
+* Interface externe → réseau provider/public.
+* iptables = NAT et règles firewall.
+
+</div>
+
+---
+
+## Gestion du réseau
+
+### Daemon de routage (L3 agent)
 
 <div style="font-size:30px">
 
-3. **Utilisation dans Twig :**  
-   Grâce à la fonction `asset()` ou `asset_path()` en Twig, vous pouvez référencer vos assets dans vos templates.
+#### Modes
 
-   Exemple :
-   ```twig
-   <link rel="stylesheet" href="{{ asset('app.css') }}">
-   <script src="{{ asset('app.js') }}"></script>
-   ```
+* **Legacy** : tout le routage sur un **network node central**.
+* **DVR (Distributed Virtual Routing)** : routage et NAT sur chaque compute → supprime SPOF.
 
 </div>
 
 ---
 
-## AssetMapper
+## Gestion du réseau
 
-#### Comment fonctionne AssetMapper ?
+###  Mise en œuvre et configuration 
+
+<div style="font-size:21px">
 
 
+### a) Installer les paquets
+
+Sur un **network node** :
+
+```bash
+apt install neutron-l3-agent neutron-dhcp-agent neutron-metadata-agent
+```
+
+### b) Configurer l’agent L3 (`/etc/neutron/l3_agent.ini`)
+
+```ini
+[DEFAULT]
+interface_driver = openvswitch
+external_network_bridge =
+agent_mode = legacy
+```
+### c) Configurer Open vSwitch
+
+```bash
+ovs-vsctl add-br br-ex
+ovs-vsctl add-port br-ex eth1   # eth1 = interface connectée au réseau public
+```
+
+</div>
+
+---
+
+## Gestion du réseau
+
+### Mise en œuvre et configuration 
+
+<div style="font-size:22px">
+
+
+#### d) Redémarrer les services
+
+```bash
+systemctl restart neutron-l3-agent neutron-dhcp-agent neutron-metadata-agent
+```
+
+#### e) Créer un réseau et un routeur
+
+```bash
+# Réseau privé
+openstack network create private-net
+openstack subnet create --network private-net --subnet-range 192.168.10.0/24 private-subnet
+
+# Réseau externe (provider)
+openstack network create public-net --external --provider-network-type flat --provider-physical-network physnet1
+openstack subnet create --network public-net --subnet-range 203.0.113.0/24 --no-dhcp --gateway 203.0.113.1 public-subnet
+
+# Routeur Neutron
+openstack router create myrouter
+openstack router set myrouter --external-gateway public-net
+openstack router add subnet myrouter private-subnet
+```
+
+</div>
+
+---
+
+## Gestion du réseau
+
+### Mise en œuvre et configuration 
+
+<div style="font-size:25px">
+
+### f) Associer une Floating IP
+
+```bash
+openstack floating ip create public-net
+openstack server add floating ip vm1 FLOATING_IP
+```
+
+
+</div>
+
+---
+
+## Gestion du réseau
+
+###  En résumé
 
 <div style="font-size:30px">
 
-4. **Installation et synchronisation des assets :**  
-   Symfony met à disposition des commandes pour synchroniser vos fichiers statiques avec le répertoire public. Par exemple :
+* **Neutron** = service réseau SDN d’OpenStack.
+* **OVS** fournit les switchs virtuels (`br-int`, `br-tun`, `br-ex`).
+* **Topologies supportées** : flat, VLAN, VXLAN (multi-tenant).
+* **L3 agent** gère le routage/NAT/Floating IP.
+* **Mise en œuvre** : configuration des agents (L3, DHCP, metadata), OVS, création de réseaux et routeurs.
+
+
+
+</div>
+
+---
+
+<!-- _class: lead -->
+<!-- _paginate: false -->
+
+## Authentification et autorisations
+
+---
+
+## Authentification et autorisations
+
+###  Présentation de la brique Keystone
+
+<div style="font-size:25px">
+
+### Rôle
+
+* Keystone est le **service d’identité et d’accès** d’OpenStack.
+* Il fournit :
+
+  * **Authentification (AuthN)** : vérifier qui se connecte (utilisateurs, services).
+  * **Autorisation (AuthZ)** : vérifier ce qu’ils peuvent faire (via rôles).
+  * **Service Catalog** : liste des services OpenStack (Nova, Neutron, Glance, etc.).
+  * **Gestion des tokens** : tickets temporaires pour accéder aux APIs.
+
+
+</div>
+
+---
+
+## Authentification et autorisations
+
+###  Présentation de la brique Keystone
+
+<div style="font-size:27px">
+
+## Concepts clés
+
+* **User** : une identité (personne ou service).
+* **Project (tenant)** : conteneur logique de ressources.
+* **Role** : définit les permissions.
+* **Domain** : regroupe projets et utilisateurs.
+* **Token** : jeton d’accès généré par Keystone après login.
+
+👉 **Keystone = le SSO (Single Sign-On) d’OpenStack**.
+
+
+
+</div>
+
+---
+
+### Authentification et autorisations
+
+#### Création des utilisateurs, projets et rôles
+
+<div style="font-size:21px">
+
+### a) Créer un projet
+
+```bash
+openstack project create --domain default --description "Projet de démonstration" demo
+```
+
+### b) Créer un utilisateur
+
+```bash
+openstack user create --domain default --project demo --password DEMO_PASS demo
+```
+
+### c) Créer un rôle
+
+```bash
+openstack role create member
+```
+
+### d) Assigner un rôle à un utilisateur dans un projet
+
+```bash
+openstack role add --project demo --user demo member
+```
+
+👉 Résultat : l’utilisateur **demo** a le rôle **member** dans le projet **demo**.
+
+</div>
+
+---
+
+### Authentification et autorisations
+
+#### Mise en œuvre et configuration de Keystone
+
+<div style="font-size:20px">
+
+## a) Base de données
+
+```sql
+CREATE DATABASE keystone;
+GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'localhost' IDENTIFIED BY 'KEYSTONE_DBPASS';
+GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'%' IDENTIFIED BY 'KEYSTONE_DBPASS';
+FLUSH PRIVILEGES;
+```
+
+## b) Installation
+
+```bash
+apt install keystone apache2 libapache2-mod-wsgi-py3
+```
+
+## c) Configuration `/etc/keystone/keystone.conf`
+
+```ini
+[database]
+connection = mysql+pymysql://keystone:KEYSTONE_DBPASS@controller/keystone
+
+[token]
+provider = fernet
+```
+</div>
+
+---
+
+### Authentification et autorisations
+
+#### Mise en œuvre et configuration de Keystone
+
+<div style="font-size:21px">
+
+## d) Initialisation
+
+```bash
+su -s /bin/sh -c "keystone-manage db_sync" keystone
+keystone-manage fernet_setup --keystone-user keystone --keystone-group keystone
+keystone-manage credential_setup --keystone-user keystone --keystone-group keystone
+
+keystone-manage bootstrap --bootstrap-password ADMIN_PASS \
+  --bootstrap-admin-url http://controller:5000/v3/ \
+  --bootstrap-internal-url http://controller:5000/v3/ \
+  --bootstrap-public-url http://controller:5000/v3/ \
+  --bootstrap-region-id RegionOne
+```
+
+## e) Configuration Apache
+
+```bash
+echo "ServerName controller" >> /etc/apache2/apache2.conf
+systemctl restart apache2
+```
+</div>
+
+---
+
+## Authentification et autorisations
+
+### Mise en œuvre et configuration de Keystone
+
+<div style="font-size:23px">
+
+## f) Variables d’environnement (admin)
+
+Créer `admin-openrc` :
+
+```bash
+export OS_USERNAME=admin
+export OS_PASSWORD=ADMIN_PASS
+export OS_PROJECT_NAME=admin
+export OS_USER_DOMAIN_NAME=Default
+export OS_PROJECT_DOMAIN_NAME=Default
+export OS_AUTH_URL=http://controller:5000/v3
+export OS_IDENTITY_API_VERSION=3
+```
+
+Charger :
+
+```bash
+source admin-openrc
+```
+</div>
+
+---
+
+### Authentification et autorisations
+
+#### Configuration des utilisateurs, projets et rôles
+
+<div style="font-size:19px">
+
+### a) Projet service (pour les services OpenStack)
+
+```bash
+openstack project create --domain default --description "Service Project" service
+```
+
+### b) Projet demo + utilisateur demo
+
+```bash
+openstack project create --domain default --description "Demo Project" demo
+openstack user create --domain default --project demo --password DEMO_PASS demo
+```
+
+### c) Créer et attribuer le rôle member
+
+```bash
+openstack role create member
+openstack role add --project demo --user demo member
+```
+
+### d) Vérification
+
+```bash
+openstack project list
+openstack user list
+openstack role assignment list --user demo --project demo --names
+```
+</div>
+
+---
+
+## Authentification et autorisations
+
+### Configuration des utilisateurs, projets et rôles
+
+<div style="font-size:25px">
+
+### e) Fichier openrc pour l’utilisateur demo
+
+Créer `demo-openrc` :
+
+```bash
+export OS_PROJECT_NAME=demo
+export OS_USERNAME=demo
+export OS_PASSWORD=DEMO_PASS
+export OS_AUTH_URL=http://controller:5000/v3
+export OS_IDENTITY_API_VERSION=3
+export OS_PROJECT_DOMAIN_NAME=Default
+export OS_USER_DOMAIN_NAME=Default
+```
+
+</div>
+
+---
+
+## Authentification et autorisations
+
+###  En résumé
+
+
+<div style="font-size:29px">
+
+* **Keystone** = gestion centralisée des identités et autorisations.
+* On définit **utilisateurs, projets, rôles** → combinaison = droits.
+* **Mise en œuvre** = DB + installation Keystone + bootstrap admin.
+* **Configuration** = création de projets (admin, service, demo), utilisateurs et rôles.
+* Accès final via fichiers **openrc** (variables d’environnement).
+
+</div>
+
+---
+
+
+<!-- _class: lead -->
+<!-- _paginate: false -->
+
+## Administration du Cloud
+
+---
+
+### Administration du Cloud
+
+####  Vue d’ensemble du client Web **Horizon**
+
+
+<div style="font-size:35px">
+
+* **Horizon** est le **tableau de bord web officiel d’OpenStack**, basé sur Django (Python).
+* Permet aux **utilisateurs** et **administrateurs** de gérer les ressources sans CLI.
+
+</div>
+
+---
+
+## Administration du Cloud
+
+###  Vue d’ensemble du client Web **Horizon**
+
+
+<div style="font-size:22px">
+
+####  Fonctions principales :
+
+* **Pour les utilisateurs** :
+
+  * Créer, démarrer, arrêter, supprimer des **instances Nova**.
+  * Gérer les **volumes (Cinder)** et **images (Glance)**.
+  * Créer des **réseaux privés (Neutron)**, configurer routeurs, floating IP, security groups.
+  * Définir des **clés SSH** et **politiques de sécurité**.
+
+* **Pour les administrateurs** :
+
+  * Gérer les **projets, utilisateurs, rôles** (Keystone).
+  * Définir les **quotas** (nombre de VM, IPs, volumes par projet).
+  * Superviser l’état des services.
+
+👉 Horizon s’appuie sur les **API REST** de Keystone, Nova, Neutron, Cinder, Glance, etc.
+
+</div>
+
+---
+
+### Administration du Cloud
+
+####  Automatisation avec l'API REST.
+
+
+<div style="font-size:18px">
+
+OpenStack est **API-first** : toutes les actions passent par des appels REST.
+Les clients CLI, SDK et Horizon utilisent ces APIs.
+
+#### 1. **Authentification via Keystone** → obtenir un **token**.
+
    ```bash
-   php bin/console asset:map
+   curl -X POST http://controller:5000/v3/auth/tokens \
+     -H "Content-Type: application/json" \
+     -d '{
+           "auth": {
+             "identity": {
+               "methods": ["password"],
+               "password": {
+                 "user": {
+                   "name": "admin",
+                   "domain": {"id": "default"},
+                   "password": "ADMIN_PASS"
+                 }
+               }
+             },
+             "scope": {
+               "project": {
+                 "name": "admin",
+                 "domain": {"id": "default"}
+               }
+             }
+           }
+         }'
    ```
-
-5. **Gestion des dépendances externes :**  
-   Vous pouvez inclure des bibliothèques ou des fichiers externes dans `asset_mapper.yaml` en ajoutant leurs chemins.
-
-</div>
-
----
-
-## AssetMapper
-
-#### **Avantages d’AssetMapper :**
-
-
-
-<div style="font-size:27px">
-
-1. **Simplicité :**  
-   Idéal pour des projets où les besoins front-end sont basiques.
-
-2. **Remplace des outils lourds :**  
-   Supprime le besoin de Webpack Encore ou d'autres outils complexes pour des projets simples.
-
-3. **Prêt à l'emploi :**  
-   Fonctionne immédiatement avec la configuration par défaut de Symfony.
-
-4. **Intégration native :**  
-   Totalement intégré dans l'écosystème Symfony.
-</div>
-
----
-
-## AssetMapper
-
-#### **Avantages d’AssetMapper :**
-
-
-
-<div style="font-size:32px">
-
-1. **Pas adapté pour les projets complexes :**  
-   Si votre projet front-end nécessite une gestion avancée (comme des frameworks JavaScript modernes, ou un système de build complexe), AssetMapper sera limité.
-
-2. **Pas de fonctionnalités avancées de build :**  
-   Il ne gère pas les fonctionnalités comme les transpilations (TypeScript ou SCSS), les optimisations poussées ou les dépendances NPM.
-
-
-</div>
-
----
-
-## AssetMapper
-
-#### Exemple complet : Utilisation d’AssetMapper
-
-
-
-<div style="font-size:23px">
-
-#### 1. Structure du projet
-```
-/assets
-    /css
-        app.css
-    /js
-        app.js
-/public
-    /assets
-        (auto-rempli par AssetMapper)
-```
-
-#### 2. Configuration `asset_mapper.yaml`
-```yaml
-asset_mapper:
-    paths:
-        'assets': ~
-```
 </div>
 
 ---
 
 
-## AssetMapper
+### Administration du Cloud
 
-#### Exemple complet : Utilisation d’AssetMapper
+####  Automatisation avec l'API REST.
 
-
-
-<div style="font-size:30px">
-
-#### 3. Utilisation dans Twig
-```twig
-<!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    </head>
-    <body>
-        <script src="{{ asset('js/app.js') }}"></script>
-    </body>
-</html>
-```
-
-</div>
-
----
-
-#### AssetMapper
-
-##### Exemple complet : Utilisation d’AssetMapper
-
-<div style="font-size:20px">
-
-
-### Les commandes d'assetMapper
-
-| Commande                  | Description                                                                                       |
-|---------------------------|---------------------------------------------------------------------------------------------------|
-| **`asset-map:compile`**   | Prépare les fichiers finaux pour les servir (minifiés, optimisés en production).                  |
-| **`asset-map:dump`**      | Génère les fichiers sans appliquer d’optimisations (principalement pour le développement).        |
-| **`asset-map:watch`**     | Surveille les modifications et génère les fichiers automatiquement en temps réel.                 |
-| **`asset-map:import`**    | Importe des actifs depuis des packages ou sources externes.                                       |
-| **`asset-map:clean`**     | Supprime les fichiers inutilisés générés par Asset Mapper.                                        |
-
----
-
-## AssetMapper
-
-#### Quand utiliser AssetMapper ?
-
-
-
-<div style="font-size:30px">
-
-
-1. **Pour des projets simples ou débutants :**  
-   Idéal si votre application n’a pas de gros besoins front-end.
-
-2. **Pour des besoins légers en CSS/JS :**  
-   Parfait pour des applications backend où l'interface utilisateur utilise peu de fichiers front-end.
-
-3. **Pour réduire la complexité :**  
-   Supprime le besoin de configurer et de maintenir des outils de build.
-</div>
-
----
-
-#### AssetMapper
 
 <div style="font-size:25px">
 
-| **Utilisez Asset Mapper si** :                            |
-|-----------------------------------------------------------|
-| - Vous travaillez principalement sur des projets Symfony backend. |
-| - Votre projet nécessite une gestion simple des assets (CSS, JS, images). |
-| - Vous préférez une solution sans dépendances supplémentaires (comme Node.js). |
-| - Vous voulez une configuration légère et rapide à mettre en place. |
+#### 2. **Consommer un service** (ex. Nova, Neutron, Glance) avec ce token :
 
-| **Utilisez Webpack/Vite si** :                            |
-|-----------------------------------------------------------|
-| - Vous développez un projet frontend complexe (React, Vue, Angular). |
-| - Vous avez besoin de transpiler du TypeScript ou ES6+ en JS compatible navigateur. |
-| - Vous souhaitez optimiser les performances avec des outils avancés (tree-shaking, code-splitting, etc.). |
-| - Vous avez besoin d'un écosystème riche de plugins pour des besoins spécifiques. |
+   * Lister les images Glance :
 
-</div>
+     ```bash
+     curl -H "X-Auth-Token: $TOKEN" http://controller:9292/v2/images
+     ```
+   * Créer une instance Nova :
 
+     ```bash
+     curl -X POST http://controller:8774/v2.1/servers \
+       -H "X-Auth-Token: $TOKEN" -H "Content-Type: application/json" \
+       -d '{"server":{"name":"demo","imageRef":"IMAGE_ID","flavorRef":"FLAVOR_ID"}}'
+     ```
 
----
-
-
-
-<!-- _class: lead -->
-<!-- _paginate: false -->
-
-## Symfony Form
-
----
-
-## Symfony Form
-
-#### Qu’est-ce que Symfony Form ?
-
-
-<div style="font-size:30px">
-
-Symfony Form est un composant qui simplifie la création, la validation et le traitement des formulaires dans une application Symfony. Il permet de :
-
-1. **Créer facilement des formulaires HTML dynamiques**.
-2. **Valider les données des formulaires** avec le composant Validator.
-3. **Mapper les données des formulaires à des objets ou tableaux**.
-4. **Gérer des formulaires imbriqués ou complexes** (par exemple, relation entre entités).
-5. **Étendre les fonctionnalités** pour répondre à des besoins spécifiques.
-   
-</div>
-
----
-
-
-## Symfony Form
-
-#### Les concepts fondamentaux 
-
-<br>
-
-<div style="font-size:30px">
-
-
-
-### **a. Structure d’un formulaire Symfony**
-Un formulaire est composé de trois éléments principaux :
-- **FormBuilder** : définit les champs et leurs types.
-- **FormView** : génère le HTML final.
-- **FormData** : contient les données mappées entre le formulaire et les objets.
+👉 API REST = base pour **Terraform, Ansible, CI/CD**.
 
 </div>
 
 ---
 
-## Symfony Form
+#### Administration du Cloud
 
-#### Les concepts fondamentaux 
+#####  Présentation des API Amazon **EC2** et **S3**
 
-<div style="font-size:30px">
-
-<br>
-
-### **b. Types de champs**
-Symfony Form fournit des types de champs prêts à l’emploi :
-- **Texte** : `TextType`, `TextareaType`, `EmailType`, `PasswordType`.
-- **Sélection** : `ChoiceType`, `EntityType`.
-- **Date et temps** : `DateType`, `DateTimeType`, `TimeType`.
-- **Collections** : `CollectionType`.
-- **Spécifiques** : `FileType`, `CheckboxType`, `RadioType`, etc.
-
-</div>
-
----
-
-## Symfony Form
-
-#### Les concepts fondamentaux 
-
-<div style="font-size:30px">
-
-<br>
-
-### **c. Méthodes courantes**
-- **Form::createView()** : Génére la vue du formulaire.
-- **Form::isSubmitted()** : Vérifie si le formulaire a été soumis.
-- **Form::isValid()** : Valide les données.
-- **Form::getData()** : Récupère les données du formulaire.
-
-</div>
-
----
-
-### Symfony Form
-
-##### Exemple de base : Création d’un formulaire
-
-<div style="font-size:19px">
-
-### **Étape 1 : Créer un FormType**
-Un `FormType` est une classe qui définit la structure et les champs d’un formulaire.
-
-```php
-// src/Form/CategoryType.php
-namespace App\Form;
-
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-
-class CategoryType extends AbstractType
-{
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
-        $builder
-            ->add('name', TextType::class, [
-                'label' => 'Nom de la catégorie',
-                'required' => true,
-                'attr' => ['class' => 'form-control']
-            ]);
-    }
-// suite
-}
-```
-</div>
-
----
-
-### Symfony Form
-
-##### Exemple de base : Création d’un formulaire
-
-<div style="font-size:19px">
-
-### **Étape 2 : Utiliser le formulaire dans un contrôleur**
-Dans un contrôleur, on crée, gère et affiche le formulaire.
-
-```php
-namespace App\Controller;
-
-class CategoryController extends AbstractController
-{
-    public function new(Request $request): Response
-    {
-        $category = new Category();
-        $form = $this->createForm(CategoryType::class, $category);
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($category);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('category_list');
-        }
-
-        return $this->render('category/new.html.twig', [
-            'form' => $form->createView(),
-        ]);
-    }
-}
-```
-
-</div>
-
----
-
-### Symfony Form
-
-##### Exemple de base : Création d’un formulaire
-
-<div style="font-size:25px">
-
-### **Étape 3 : Afficher le formulaire dans Twig**
-
-Symfony fournit une fonction Twig pour rendre un formulaire.
-
-```twig
-{# templates/category/new.html.twig #}
-
-{% extends 'base.html.twig' %}
-
-{% block body %}
-    <h1>Créer une catégorie</h1>
-
-    {{ form_start(form) }}
-        {{ form_row(form.name) }}
-        <button class="btn btn-primary">Enregistrer</button>
-    {{ form_end(form) }}
-{% endblock %}
-
-```
-</div>
-
----
-
-### Symfony Form
-
-#### Exemple de base : Création d’un formulaire
-
-<div style="font-size:25px">
-
-### **Étape 3 : Afficher le formulaire dans Twig**
-
-Symfony fournit une fonction Twig pour rendre un formulaire.
-
-```twig
-{# templates/category/new.html.twig #}
-
-{% extends 'base.html.twig' %}
-
-{% block body %}
-    <h1>Créer une catégorie</h1>
-
-    {{ form_start(form) }}
-        {{ form_row(form.name) }}
-        <button class="btn btn-primary">Enregistrer</button>
-    {{ form_end(form) }}
-{% endblock %}
-
-```
-</div>
-
----
-
-### Symfony Form
-
-#### Options avancées
-
-<div style="font-size:25px">
-
-
-### **a. Validation des données**
-Symfony Form est étroitement lié au composant Validator. Ajoutez des contraintes directement dans les entités.
-
-```php
-// src/Entity/Category.php
-use Symfony\Component\Validator\Constraints as Assert;
-
-class Category
-{
-    #[Assert\NotBlank]
-    #[Assert\Length(min: 3, max: 50)]
-    private $name;
-}
-```
-</div>
-
----
-
-### Symfony Form
-
-#### Options avancées
-
-<div style="font-size:30px">
-
-<br>
-
-### **b. Champs liés à des entités**
-Le `EntityType` permet de créer un champ lié à une entité.
-
-```php
-$builder->add('category', EntityType::class, [
-    'class' => Category::class,
-    'choice_label' => 'name',
-]);
-```
-
-</div>
-
----
-
-### Symfony Form
-
-#### Options avancées
-
-<div style="font-size:30px">
-
-<br>
-
-### **c. Collections de champs**
-Le `CollectionType` permet de gérer des ensembles dynamiques (par exemple, une liste de tags).
-
-```php
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-
-$builder->add('tags', CollectionType::class, [
-    'entry_type' => TextType::class,
-    'allow_add' => true,
-    'allow_delete' => true,
-]);
-```
-
-</div>
-
----
-
-### Symfony Form
-
-#### Options avancées
-
-<div style="font-size:25px">
-
-### **d. Champs personnalisés**
-Vous pouvez créer vos propres types de champs.
-
-```php
-// src/Form/Type/CustomType.php
-namespace App\Form\Type;
-
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-
-class CustomType extends AbstractType
-{
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
-        // Logique pour construire le champ
-    }
-}
-```
-
-</div>
-
----
-
-### Symfony Form
-
-####  Bonnes pratiques
-
-<div style="font-size:30px">
-
-1. **Isoler la logique dans les FormType :** Évitez de surcharger vos contrôleurs avec la logique des formulaires.
-2. **Réutilisation :** Créez des FormTypes réutilisables dans plusieurs formulaires.
-3. **Validation cohérente :** Placez vos règles de validation dans vos entités pour centraliser la logique.
-4. **Personnalisation :** Utilisez des classes CSS ou des templates Twig pour personnaliser le rendu.
-
-</div>
-
----
-
-
-<!-- _class: lead -->
-<!-- _paginate: false -->
-
-## Symfony UX
-
----
-
-### Symfony UX
-
-#### Introduction
-
-<div style="font-size:30px">
-
-<br>
-
-- **Symfony UX** est une initiative de Symfony qui vise à rapprocher le développement **frontend** et **backend**, en facilitant l’intégration d’outils JavaScript modernes dans les applications Symfony. 
-- Il repose sur des principes de **progressive enhancement**, où le JavaScript améliore l’expérience utilisateur sans complexifier inutilement votre projet.
-
-- Symfony UX a été introduit avec Symfony 5.3 et reste entièrement compatible avec Symfony 7.
-
-</div>
-
----
-
-### Symfony UX
-
-#### Les Objectifs de Symfony UX
-
-<div style="font-size:30px">
-
-<br>
-
-Symfony UX facilite :
-- **L’intégration d’outils modernes** comme Stimulus, Webpack Encore, et Turbo.
-- **La création de composants interactifs** sans écrire de JavaScript complexe.
-- **L’automatisation des workflows** pour inclure des librairies front-end (charts, éditeurs de texte riche, carrousels, etc.).
-- **Une expérience utilisateur optimisée** grâce à l’enrichissement progressif des fonctionnalités.
-</div>
-
----
-
-### Symfony UX
-
-#### Les Composants Clés de Symfony UX
-
-<div style="font-size:22px">
-
-
-#### **A. Stimulus**
-Stimulus est un framework JavaScript léger conçu pour travailler en harmonie avec votre HTML. Il permet de rendre vos applications interactives en associant des contrôleurs JavaScript à des éléments HTML via des attributs `data-*`.
-
-**Exemple :**
-```html
-<button data-controller="hello" data-action="click->hello#greet">
-    Cliquez-moi !
-</button>
-```
-
-```javascript
-// assets/controllers/hello_controller.js
-import { Controller } from '@hotwired/stimulus';
-
-export default class extends Controller {
-    greet() {
-        alert('Bonjour depuis Symfony UX avec Stimulus !');
-    }
-}
-```
-
-</div>
-
----
-
-### Symfony UX
-
-#### Les Composants Clés de Symfony UX
-
-<div style="font-size:35px">
-
-
-#### **B. Turbo**
-- Turbo (issu du projet Hotwire) remplace la navigation complète des pages par une navigation "turbo", où seules les parties pertinentes de la page sont mises à jour. 
-- Cela permet des **performances améliorées** et une **expérience utilisateur fluide**, sans nécessiter un framework JavaScript complet comme React ou Vue.js.
-
-
-</div>
-
----
-
-### Symfony UX
-
-#### Les Composants Clés de Symfony UX
-
-<div style="font-size:30px">
-
-<br>
-
-#### **C. Webpack Encore**
-Symfony UX repose sur **Webpack Encore** pour gérer les assets (JavaScript, CSS, images, etc.) de manière efficace. Cela inclut la compilation, la minification et la gestion des dépendances npm.
-
-Commandes associées :
-```bash
-composer require symfony/webpack-encore-bundle
-yarn install
-```
-
-</div>
-
----
-
-### Symfony UX
-
-#### Les Composants Clés de Symfony UX
-
-<div style="font-size:25px">
-
-<br>
-
-#### **D. Packages Symfony UX**
-Symfony UX propose une série de packages préconfigurés pour des fonctionnalités courantes :
-- **symfony/ux-chartjs** : Intégration de graphiques avec Chart.js.
-- **symfony/ux-twig-component** : Composants Twig dynamiques.
-- **symfony/ux-dropzone** : Upload de fichiers avec une interface glisser-déposer.
-- **symfony/ux-swup** : Transitions fluides entre les pages.
-
-Exemple d’installation d’un package UX :
-```bash
-composer require symfony/ux-chartjs
-yarn install
-yarn dev
-```
-</div>
-
----
-
-
-### Symfony UX
-
-#### Focus : Turbo UX
-
-<div style="font-size:35px">
-
-<br>
-
-- Turbo (anciennement partie de "Hotwire" par Basecamp) est un ensemble d'outils front-end conçu pour construire des applications web modernes avec des interactions rapides et fluides, sans avoir besoin de beaucoup de JavaScript personnalisé. 
-- Turbo est souvent utilisé dans les frameworks tels que Ruby on Rails ou Symfony pour améliorer l'expérience utilisateur (UX) et réduire la complexité côté client.
-
-</div>
-
----
-
-### Symfony UX
-
-#### Focus : Turbo UX
-
-<div style="font-size:22px">
-
-
-## **1. Introduction à Turbo UX**
-
-Turbo est composé de plusieurs modules qui facilitent la création d'interfaces utilisateurs interactives en tirant parti des fonctionnalités natives du navigateur et d'une architecture back-end riche. 
-
-Les principaux modules de Turbo sont :
-- **Turbo Drive** : Remplace le comportement des liens et des formulaires pour réduire le rechargement complet de la page.
-- **Turbo Frames** : Permet de mettre à jour des parties spécifiques d'une page sans rechargement complet.
-- **Turbo Streams** : Facilite la mise à jour dynamique des contenus via WebSocket ou AJAX, basé sur des commandes spécifiques.
-- **Turbo Native** : Intègre Turbo dans des applications mobiles pour partager le même code entre web et mobile.
-
-</div>
-
----
-
-### Symfony UX
-
-#### Focus : Turbo UX
 
 <div style="font-size:18px">
 
-## **2. Turbo Drive**
+####  EC2 (Elastic Compute Cloud)
 
-### Fonctionnalité :
-- Turbo Drive intercepte les clics sur les liens et les soumissions de formulaire pour recharger uniquement la partie pertinente de la page.
-- Remplace le comportement classique des requêtes HTTP avec des requêtes AJAX suivies d'un remplacement partiel du DOM.
+* API pour gérer les **machines virtuelles** (instances).
+* Fonctions principales :
 
-### Principaux avantages :
-- **Navigation rapide** : Seules les parties nécessaires de la page sont rechargées.
-- **Amélioration de l'UX** : Pas de flashs d'écran, l'état du DOM est préservé (exemple : champ de recherche non réinitialisé).
-- **Gestion historique automatique** : Turbo gère l’historique du navigateur automatiquement.
+  * Lancer/arrêter/terminer des instances.
+  * Associer des volumes (EBS).
+  * Gérer des **sécurités (security groups)** et **Elastic IPs**.
+* **Équivalent OpenStack** : **Nova (Compute)** + **Neutron (réseau)** + **Cinder (stockage bloc)**.
 
-### Exemple :
-```html
-<a href="/posts" data-turbo="true">View Posts</a>
-```
+####  S3 (Simple Storage Service)
 
-- Lors du clic sur ce lien, Turbo Drive chargera la page `/posts` sans effectuer de rechargement complet.
+* API orientée **stockage objet**.
+* Fonctions principales :
+
+  * Créer des **buckets**.
+  * Upload/download d’objets.
+  * Gestion des ACL et politiques d’accès.
+* **Équivalent OpenStack** : **Swift (Object Storage)**.
+
+👉 Les APIs EC2 et S3 sont devenues des **standards de facto**, au point qu’OpenStack propose parfois des compatibilités.
+
+
 </div>
 
 ---
 
-#### Symfony UX
+## Administration du Cloud
 
-##### Focus : Turbo UX
+###  Automatisation avec **Cloud-init**
 
-<div style="font-size:17px">
-
-## **3. Turbo Frames**
-
-### Fonctionnalité :
-- Turbo Frames permet de diviser une page en plusieurs "frames" indépendantes.
-- Chaque frame peut être mis à jour individuellement sans recharger la page entière.
-
-### Principaux avantages :
-- **Chargement asynchrone** : Charge les parties nécessaires de la page.
-- **Réutilisation de composants** : Rend les sections indépendantes et réutilisables.
-- **Simplicité** : Réduit la nécessité d'écrire du JavaScript personnalisé.
-
-### Exemple :
-
-
-```html
-<turbo-frame id="post-form">
-    <form method="post" action="/post/create">
-        <input type="text" name="title" placeholder="Title">
-        <textarea name="content" placeholder="Content"></textarea>
-        <button type="submit">Submit</button>
-    </form>
-</turbo-frame>
-```
-
-- Lorsque vous soumettez ce formulaire, seule la frame `post-form` est mise à jour avec la réponse.
-</div>
-
----
-
-#### Symfony UX
-
-##### Focus : Turbo UX
-
-<div style="font-size:23px">
-
-## **4. Turbo Streams**
-
-### Fonctionnalité :
-- Turbo Streams permet de manipuler dynamiquement le DOM en réponse à des actions côté serveur.
-- Utilisé avec des actions telles que `append`, `replace`, `remove`, ou `update` pour modifier des éléments spécifiques.
-
-### Principaux avantages :
-- **Interopérabilité** : Peut être utilisé avec AJAX ou WebSocket.
-- **Modifications ciblées** : Effectue des changements précis sur le DOM, améliorant la performance.
-- **Optimisé pour les interactions en temps réel**.
-  
-</div>
-
----
-
-#### Symfony UX
-
-##### Focus : Turbo UX
-
-<div style="font-size:22px">
-
-## **4. Turbo Streams**
-
-### Exemple :
-Turbo Stream pour ajouter un nouveau post à une liste :
-
-#### Côté serveur (Symfony) :
-```php
-return $this->render('post/stream.html.twig', [
-    'post' => $newPost,
-], new Response('', 200, ['Content-Type' => 'text/vnd.turbo-stream.html']));
-```
-
-#### Fichier Twig (`stream.html.twig`) :
-```html
-<turbo-stream action="append" target="posts">
-    <template>
-        <li>{{ post.title }}</li>
-    </template>
-</turbo-stream>
-```
-
-- Ici, l'action `append` ajoute le nouveau post à l'élément avec l'ID `posts`.
-</div>
-
----
-
-#### Symfony UX
-
-##### Focus : Turbo UX
 
 <div style="font-size:24px">
 
-## **5. Turbo Native**
+* **Cloud-init** est un agent présent dans les images cloud (Ubuntu, CentOS, Windows via Cloudbase-init).
+* Il permet de **personnaliser une VM au premier boot** en lisant des métadonnées fournies par Nova.
 
-### Fonctionnalité :
-- Permet d'utiliser Turbo dans des applications mobiles (iOS et Android).
-- Les applications mobiles peuvent utiliser des vues HTML servies depuis un back-end partagé.
+### 📌 Fonctions :
 
-### Principaux avantages :
-- **Code partagé** : Réutilise les vues HTML du site web dans l'application mobile.
-- **Performances natives** : Bénéficie de la rapidité des applications natives.
-- **Facilité d'intégration** : Simple à intégrer dans des projets mobiles existants.
-
-</div>
-
----
-
-#### Symfony UX
-
-##### Focus : Turbo UX
-
-<div style="font-size:19px">
-
-## **6. Comment Turbo améliore l'UX**
-
-### 6.1. **Performance :**
-- Turbo minimise les rechargements complets de page, ce qui réduit le temps de chargement global et améliore la fluidité des interactions.
-
-### 6.2. **Réactivité :**
-- Avec Turbo Streams, les actions côté serveur (comme la création ou la suppression d'éléments) sont immédiatement reflétées côté client, sans avoir à écrire de JavaScript.
-
-### 6.3. **État et continuité :**
-- Turbo Drive préserve l'état des formulaires et de la page entre les chargements, évitant des comportements déroutants pour l'utilisateur.
-
-### 6.4. **Simplicité pour les développeurs :**
-- Turbo réduit la quantité de JavaScript personnalisé nécessaire pour des interactions complexes, permettant aux développeurs de se concentrer sur le back-end.
-</div>
-
----
-
-### Symfony UX
-
-#### Focus : Twig Component et Live Component
-
-<div style="font-size:35px">
-
-<br>
-
-- Symfony UX propose des outils pour construire des interfaces utilisateur modernes, réactives et dynamiques tout en restant dans l'environnement PHP avec Twig. 
-- Les **Twig Components** et **Live Components** sont des éléments clés de cette approche, permettant respectivement de structurer et de dynamiser vos interfaces.
-</div>
-
----
-
-### Symfony UX
-
-#### Focus : Twig Component et Live Component
-
-<div style="font-size:26px">
-
-
-## **1. Twig Component**
-
-Les **Twig Components** offrent un moyen structuré de créer des éléments réutilisables avec leur propre logique et template.
-
-### Caractéristiques principales :
-- **Modularité** : Les Twig Components encapsulent la logique et l'affichage dans des modules réutilisables.
-- **Interopérabilité** : Ils fonctionnent exclusivement avec Twig, sans nécessiter de connaissances spécifiques en JavaScript.
-- **Simplicité** : Parfait pour les interfaces statiques ou légèrement dynamiques.
+* Configurer le **hostname, utilisateurs, clés SSH**.
+* Installer des **packages** (Apache, MySQL, etc.).
+* Déployer des fichiers, lancer des scripts.
+* Déclencher des outils de config (Ansible, Puppet, Chef).
 
 </div>
 
 ---
 
-### Symfony UX
+## Administration du Cloud
 
-#### Focus : Twig Component et Live Component
+###  Automatisation avec **Cloud-init**
 
-<div style="font-size:22px">
-
-
-### **Mise en place d’un Twig Component**
-
-#### Installation :
-Ajoutez le package requis pour utiliser Twig Component :
-```bash
-composer require symfony/ux-twig-component
-```
-
-#### Création d’un composant :
-Utilisez la commande pour générer un composant :
-```bash
-php bin/console make:twig-component Alert
-```
-
-Cela génère deux fichiers :
-1. **`src/Twig/Component/Alert.php`** (logique métier du composant).
-2. **`templates/components/alert.html.twig`** (template associé).
-</div>
-
----
-
-### Symfony UX
-
-#### Focus : Twig Component et Live Component
-
-<div style="font-size:18px">
-
-
-#### Exemple de composant simple :
-
-**Fichier PHP :**
-```php
-namespace App\Twig\Component;
-
-use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
-
-#[AsTwigComponent('alert')]
-class Alert
-{
-    public string $type = 'success'; // Type par défaut
-    public string $message;         // Message à afficher
-}
-```
-
-**Fichier Twig :**
-```twig
-<div class="alert alert-{{ type }}">
-    {{ message }}
-</div>
-```
-
-**Utilisation dans un autre template :**
-```twig
-{{ component('alert', { type: 'warning', message: 'Attention, Twig Components rocks!' }) }}
-```
-
-</div>
-
----
-
-### Symfony UX
-
-#### Focus : Twig Component et Live Component
-
-<div style="font-size:30px">
-
-### **Syntaxe HTML enrichie avec `twig:`**
-
-<br>
-
-Avec Symfony 7+, vous pouvez utiliser une syntaxe proche de celle des frameworks front-end :
-
-```html
-
-<twig:alert type="info" message="This is a reusable component!" />
-```
-
-
-</div>
-
----
-
-### Symfony UX
-
-#### Focus : Twig Component et Live Component
-
-<div style="font-size:18px">
-
-### **Slots dans Twig Components**
-
-Les **slots** permettent d’inclure du contenu dynamique ou conditionnel dans un composant.
-
-#### Exemple avec un slot :
-**Template avec slot :**
-```twig
-<div class="alert alert-{{ type }}">
-    {{ message }}
-    {% if slot('extra') %}
-        <div class="extra-content">
-            {{ slot('extra') }}
-        </div>
-    {% endif %}
-</div>
-```
-
-**Utilisation :**
-
-```twig
-<twig:alert type="info" message="Here's the message">
-    <slot name="extra">
-        <p>Contenu additionnel avec un lien : <a href="#">cliquez ici</a></p>
-    </slot>
-</twig:alert>
-
-```
-
-</div>
-
----
-
-### Symfony UX
-
-#### Focus : Twig Component et Live Component
 
 <div style="font-size:24px">
 
-## **2. Live Component**
-
-Les **Live Components** enrichissent les Twig Components en leur ajoutant des capacités interactives et dynamiques via AJAX, sans recharger la page. Ils permettent de construire des interfaces réactives en restant dans un environnement Symfony et PHP.
-
-### Caractéristiques principales :
-- **Réactivité** : Dynamisez les interfaces utilisateur avec des mises à jour côté serveur sans rafraîchissement de page.
-- **Interopérabilité JavaScript** : Basé sur Stimulus et Turbo Streams, mais sans écrire de JS complexe.
-- **Automatisation** : Synchronisation automatique entre l'état côté serveur et l'interface utilisateur.
-</div>
-
----
-
-### Symfony UX
-
-#### Focus : Twig Component et Live Component
-
-<div style="font-size:22px">
-
-### **Mise en place d’un Live Component**
-
-#### Installation :
-Ajoutez les packages nécessaires :
-```bash
-composer require symfony/ux-live-component
-yarn add @symfony/ux-live-component
-yarn dev
-```
-
-#### Création d’un composant :
-```bash
-php bin/console make:live-component Counter
-```
-
-Cela génère deux fichiers :
-1. **`src/Twig/Component/Counter.php`** : Classe PHP du composant.
-2. **`templates/components/counter.html.twig`** : Template Twig associé.
-
-</div>
-
----
-
-### Symfony UX
-
-#### Focus : Twig Component et Live Component
-
-<div style="font-size:19px">
-
-### Exemple de Live Component simple :
-
-**Classe PHP :**
-```php
-namespace App\Twig\Component;
-
-use Symfony\UX\LiveComponent\Attribute\LiveProp;
-use Symfony\UX\LiveComponent\DefaultActionTrait;
-use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
-
-#[AsLiveComponent('counter')]
-class Counter
-{
-    use DefaultActionTrait;
-
-    #[LiveProp]
-    public int $count = 0;
-
-    public function increment(): void
-    {
-        $this->count++;
-    }
-}
-```
-
-**Template Twig :**
-```twig
-<div>
-    <p>Compteur : {{ count }}</p>
-    <button wire:click="increment">Incrémenter</button>
-</div>
-```
-
-</div>
-
----
-
-### Symfony UX
-
-#### Focus : Twig Component et Live Component
-
-<div style="font-size:30px">
-
-<br>
-
-**Utilisation dans un template :**
-```twig
-{{ component('counter') }}
-```
-
-Dans cet exemple :
-- `#[LiveProp]` permet de synchroniser la variable `$count` entre le front-end et le serveur.
-- `wire:click="increment"` déclenche l'exécution de la méthode `increment()` côté serveur.
-
-
-</div>
-
----
-
-### Symfony UX
-
-#### Focus : Twig Component et Live Component
-
-<div style="font-size:27px">
-
-### **Fonctionnalités avancées avec Live Components**
-
-#### **1. Props synchronisées avec des formulaires**
-Les Live Props peuvent être liées à des champs de formulaire pour des mises à jour en temps réel.
-
-**Classe PHP :**
-```php
-#[LiveProp]
-public string $name = '';
-```
-
-**Template Twig :**
-```twig
-<input type="text" wire:model="name" />
-<p>Bonjour, {{ name }} !</p>
-```
-
-</div>
-
----
-
-### Symfony UX
-
-#### Focus : Twig Component et Live Component
-
-<div style="font-size:27px">
-
-<br>
-
-#### **2. Gestion des événements**
-
-Vous pouvez écouter ou déclencher des événements depuis un Live Component.
-
-**Classe PHP :**
-```php
-public function resetCount(): void
-{
-    $this->count = 0;
-}
-```
-
-**Template Twig :**
-```twig
-<button wire:click="resetCount">Réinitialiser</button>
-```
-
-</div>
-
----
-
-### Symfony UX
-
-#### Focus : Twig Component et Live Component
-
-<div style="font-size:19px">
-
-## **Twig Components vs Live Components**
-
-| **Aspect**               | **Twig Component**                                | **Live Component**                               |
-|--------------------------|--------------------------------------------------|------------------------------------------------|
-| **Usage principal**      | Composants statiques ou légèrement dynamiques    | Interfaces interactives et réactives           |
-| **Interopérabilité JS**  | Pas nécessaire                                   | Nécessite Stimulus et Turbo                    |
-| **Rafraîchissement DOM** | Complet                                          | Partiel grâce à Turbo Streams                  |
-| **Synchronisation**      | Non (données passées uniquement en paramètres)   | Oui, entre le front-end et le serveur          |
-| **Installation**         | Simplicité                                       | Plus complexe                                  |
-
-</div>
-
----
-
-<!-- _class: lead -->
-<!-- _paginate: false -->
-
-## Workflow
-
----
-
-### Workflow
-
-#### Introduction
-
-<br>
-
-<div style="font-size:35px">
-
-- Le composant **Workflow** de Symfony permet de modéliser des processus métiers complexes en définissant des **états**, des **transitions**, et des **logiques conditionnelles**. 
-- Il est particulièrement utile pour gérer des flux tels que des systèmes de validation, des pipelines de traitement ou des étapes de processus (ex. : commandes, publications d'articles, etc.).
-
-</div>
-
----
-
-### Workflow
-
-#### Introduction
-
-
-
-<div style="font-size:27px">
-
-### **1. Concepts Clés**
-
-1. **Sujet (Subject)** : L'objet sur lequel le workflow s'applique.
-2. **Places** : Les différents **états** dans lesquels un sujet peut se trouver.
-3. **Transitions** : Les **actions** ou **changements** qui permettent de passer d’un état à un autre.
-4. **Marquage (Marking)** : Représentation de l'état actuel du sujet dans le workflow.
-5. **Guards (Gardiens)** : Des conditions qui doivent être remplies pour qu'une transition soit possible.
-6. **Événements** : Des hooks permettant d'exécuter des actions pendant une transition.
-
-</div>
-
----
-
-### Workflow
-
-#### Introduction
-
-<br>
-
-<div style="font-size:35px">
-
-### **2. Installation et Configuration**
-
-#### **Installation**
-Ajoutez le composant Workflow à votre projet :
-```bash
-composer require symfony/workflow
-```
-
-</div>
-
----
-
-### Workflow
-
-#### Introduction
-
-<div style="font-size:18px">
-
-#### **Configuration**
-Dans le fichier `config/packages/workflow.yaml`, configurez votre workflow. Voici un exemple de workflow pour un article de blog :
+### Exemple de script `user-data` :
 
 ```yaml
-framework:
-    workflows:
-        article_workflow: # Nom du workflow
-            type: 'state_machine' # Peut être 'workflow' ou 'state_machine'
-            marking_store:
-                type: 'single_state' # Permet un seul état à la fois
-            supports:
-                - App\Entity\Article # Classe sur laquelle le workflow s'applique
-            places: # États possibles
-                - draft
-                - review
-                - published
-            transitions: # Définition des transitions
-                to_review:
-                    from: draft
-                    to: review
-                publish:
-                    from: review
-                    to: published
+#cloud-config
+hostname: web01
+users:
+  - name: devuser
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3Nz...xyz
+packages:
+  - apache2
+  - mysql-client
+write_files:
+  - path: /var/www/html/index.html
+    content: |
+      <h1>Bienvenue sur mon serveur web 🚀</h1>
+runcmd:
+  - systemctl enable apache2
+  - systemctl start apache2
 ```
+
+
 
 </div>
 
 ---
 
+## Administration du Cloud
 
-### Workflow
+###  Automatisation avec **Cloud-init**
 
-#### Introduction
 
-<div style="font-size:20px">
+<div style="font-size:24px">
 
-### **3. Utilisation dans le Code**
+Déploiement via OpenStack CLI :
 
-#### **Définir une entité**
-Créez une entité qui représentera le sujet du workflow.
-
-```php
-namespace App\Entity;
-
-class Article
-{
-    private string $currentState = 'draft'; // État initial
-
-    public function getCurrentState(): string
-    {
-        return $this->currentState;
-    }
-
-    public function setCurrentState(string $state): void
-    {
-        $this->currentState = $state;
-    }
-}
+```bash
+openstack server create \
+  --flavor m1.small \
+  --image Ubuntu-22.04 \
+  --nic net-id=private-net \
+  --user-data init.yaml \
+  web01
 ```
+
+👉 Au premier démarrage, Cloud-init applique la config → VM prête automatiquement.
+
+
+
+
 </div>
 
 ---
 
-### Workflow
+## Administration du Cloud
 
-#### Introduction
+###  Automatisation avec **Cloud-init**
 
-<div style="font-size:18px">
-
-### **3. Utilisation dans le Code**
-
-#### **Injecter le service Workflow**
-
-```php
-
-class ArticleController extends AbstractController
-{
-    public function index(WorkflowInterface $articleWorkflow): Response
-    {
-        $article = new Article();
-
-        // Vérifier les transitions possibles
-        $transitions = $articleWorkflow->getEnabledTransitions($article);
-        foreach ($transitions as $transition) {
-            echo $transition->getName(); // Affiche "to_review"
-        }
-
-        // Appliquer une transition
-        if ($articleWorkflow->can($article, 'to_review')) {
-            $articleWorkflow->apply($article, 'to_review');
-        }
-
-        return new Response('Workflow exécuté');
-    }
-}
-```
-</div>
-
----
-
-### Workflow
-
-#### Introduction
 
 <div style="font-size:28px">
 
-### **4. Types de Workflows**
+###  Synthèse
 
-1. **Workflow** :
-   - Permet à un sujet d’être dans plusieurs états simultanément.
-   - Exemple : Un article peut être en cours de rédaction et en cours de révision.
+* **Horizon** = interface web pour administrer le cloud.
+* **API REST** = cœur d’OpenStack, base de toute automatisation (Terraform, Ansible, CI/CD).
+* **API Amazon (EC2 & S3)** = standards cloud → Nova/Neutron/Cinder et Swift sont les équivalents OpenStack.
+* **Cloud-init** = outil d’automatisation dans l’instance → personnalisation au boot (utilisateurs, packages, services).
 
-2. **State Machine** :
-   - Le sujet ne peut être que dans un seul état à la fois.
-   - Exemple : Un système de validation d'une commande (créée, en attente de validation, expédiée).
+
+
 
 </div>
 
----
-
-### Workflow
-
-#### Introduction
-
-<div style="font-size:25px">
-
-### **5. Guards (Conditions)**
-
-Les guards permettent de définir des conditions pour qu'une transition soit possible.
-
-#### Exemple avec des guards :
-```yaml
-framework:
-    workflows:
-        article_workflow:
-            transitions:
-                to_review:
-                    from: draft
-                    to: review
-                    guard: "is_granted('ROLE_EDITOR')"
-```
-
-Dans cet exemple, la transition `to_review` ne peut être effectuée que par un utilisateur ayant le rôle `ROLE_EDITOR`.
-
-</div>
-
----
-
-### Workflow
-
-#### Introduction
-
-<div style="font-size:18px">
-
-### **6. Événements**
-
-#### Exemple d'écouteur d'événements :
-```php
-
-
-class WorkflowSubscriber implements EventSubscriberInterface
-{
-    public static function getSubscribedEvents(): array
-    {
-        return [
-            'workflow.article_workflow.guard.to_review' => 'onGuardToReview',
-            'workflow.article_workflow.completed.to_review' => 'onCompletedToReview',
-        ];
-    }
-
-    public function onGuardToReview(GuardEvent $event): void
-    {
-        // Bloquer la transition si une condition n'est pas remplie
-        $subject = $event->getSubject(); // L'objet lié au workflow
-        if ($subject instanceof Article && $subject->getCurrentState() !== 'draft') {
-            $event->setBlocked(true);
-        }
-    }
-
-    public function onCompletedToReview(CompletedEvent $event): void
-    {
-        // Action après une transition
-        $subject = $event->getSubject();
-        // Par exemple, envoyer une notification
-    }
-}
-```
-</div>
-
----
-
-### Workflow
-
-#### Introduction
-
-<div style="font-size:19px">
-
-### **7. Visualisation du Workflow**
-
-Symfony offre une intégration avec Graphviz pour visualiser votre workflow.
-
-#### Installation de Graphviz :
-```bash
-sudo apt install graphviz # Linux
-brew install graphviz     # macOS
-choco install graphviz    # Windows
-```
-
-#### Générer un graphe :
-Ajoutez ceci à un contrôleur ou une commande :
-```php
-use Symfony\Component\Workflow\Dumper\GraphvizDumper;
-
-$dumper = new GraphvizDumper();
-echo $dumper->dump($workflow->getDefinition());
-```
-
-Ensuite, utilisez Graphviz pour convertir ce graphe en image :
-```bash
-php bin/console workflow:dump article_workflow | dot -Tpng -o workflow.png
-```
-
-</div>
-
----
-
-### Workflow
-
-#### Introduction
-
-<div style="font-size:30px">
-
-### **8. Bonnes Pratiques**
-
-1. **Modularité** : Gardez vos workflows simples et spécifiques.
-2. **Tests** : Testez les conditions et transitions pour éviter des bugs.
-3. **Documentation** : Documentez vos workflows pour les rendre compréhensibles.
-4. **Événements** : Utilisez les événements pour des tâches comme la journalisation ou les notifications.
-
-</div>
